@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Короткий лого NaidaBureau: «N.» — біла N і салатова крапка -->
+  <rect width="64" height="64" rx="14" fill="#0B0B0D"/>
+  <path d="M12 50V14h10l15 22V14h9v36H36L21 28v22z" fill="#F2F2F2"/>
+  <rect x="49" y="41" width="9" height="9" rx="2" fill="#D7FF3D"/>
+</svg>
