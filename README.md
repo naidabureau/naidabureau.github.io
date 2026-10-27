@@ -3,7 +3,7 @@
 **Портфоліо Наталії Найди — дизайнерки й фулстак-розробниці.**
 Застосунки, сайти й віджети: дизайн — мій, код — з AI, контроль — мій.
 
-🔗 **Сайт:** https://nat-developer.github.io
+🔗 **Сайт:** https://naidabureau.github.io
 
 ## Що всередині
 
@@ -20,6 +20,10 @@
 ## Роботи
 - **Відважні.PRO** — застосунок для ветеранського бізнесу (Python · Django · PostgreSQL)
 - **Чисті серця Калуш** — сайт громадської організації (pureheartskalush.com)
+
+## Контакти
+- Email: naidadesign.int@gmail.com
+- Телефон: +380 93 000 37 43
 
 ## Локально
 Відкрийте папку у VS Code → розширення Live Server → `index.html` → *Open with Live Server*.

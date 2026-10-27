@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta property="og:title" content="NaidaBureau — Nataliia Naida">
-<meta property="og:description" content="Design &amp; full-stack code: apps, websites, widgets.">
+<meta name="description" content="NaidaBureau — Наталія Найда, дизайнерка і фулстак-розробниця: застосунки, сайти, віджети.">
+<meta property="og:title" content="NaidaBureau">
+<meta property="og:description" content="Design &amp; fullstack code: застосунки, сайти, віджети.">
 <title>NaidaOS</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@300;400;500;700&family=Manrope:wght@400;500;700&display=swap">
 <style>
@@ -270,8 +271,6 @@ const content = {
       <div class="files">
         <button class="file" type="button" data-open="vidvazhni"><div class="th"><img src="works/vidvazhni-home-dark.jpg" alt=""></div>Відважні.PRO</button>
         <button class="file" type="button" data-open="pureheart"><div class="th"><img src="works/pureheart-hero.jpg" alt=""></div>Чисті серця Калуш</button>
-        <button class="file" type="button" data-toast="Тут буде ваш наступний проєкт"><div class="th ph">[ваш проєкт]</div>[Проєкт 3]</button>
-        <button class="file" type="button" data-toast="Тут буде ваш наступний проєкт"><div class="th ph">[віджет]</div>[Віджет або бот]</button>
       </div>
     </div>`,
   vidvazhni: () => `
@@ -308,7 +307,7 @@ const content = {
         ${['Дизайн з нуля', 'Адмін-панель', 'Онлайн-оплата', 'Кілька мов', 'Анімації «вау»', 'Підтримка'].map((o, i) => `<button type="button" class="opt" aria-pressed="${i === 0}"><span class="box">✓</span>${o}</button>`).join('')}
       </div>
       <div class="sum"><b style="font-family:var(--f-display);font-weight:400;font-size:20px" data-sumt>Лендинг</b><span data-suml style="font-size:13px;line-height:1.6"></span>
-        <span style="font-size:13px">Термін: [X тижнів] · Вартість: від [ВАША ЦІНА]</span></div>
+        <span style="font-size:13px">Вартість і терміни — після короткої розмови</span></div>
       <button type="button" class="btn" data-open="mail">Обговорити проєкт →</button>
     </div>`,
   me: () => `<div class="txt" data-type></div>`,
@@ -318,7 +317,7 @@ const content = {
       <label for="m-what">Що хочете створити</label><input id="m-what" placeholder="Сайт, застосунок, бот…">
       <label for="m-msg">Повідомлення</label><textarea id="m-msg" placeholder="Кілька слів про ідею"></textarea>
       <button class="btn" type="submit">Надіслати</button>
-      <span class="mut" style="font-size:12px">Або пишіть напряму: [your@email.com]</span>
+      <span class="mut" style="font-size:12px">Або напряму: <a href="mailto:naidadesign.int@gmail.com" style="color:var(--lime)">naidadesign.int@gmail.com</a> · <a href="tel:+380930003743" style="color:var(--lime)">+380 93 000 37 43</a></span>
     </form>`,
   bin: () => `<div class="pad"><h2 class="h" style="font-size:20px">Ідеї, які я викинула</h2>
     <div style="display:flex;flex-direction:column;gap:8px;font-family:var(--f-mono);font-size:13px;color:#D0CED5">
@@ -406,11 +405,12 @@ const init = {
     const hist = []; let hi = 0;
     const print = (h) => { out.insertAdjacentHTML('beforeend', `<div>${h}</div>`); box.scrollTop = box.scrollHeight; };
     const CMD = {
-      help: () => `<span class="d">доступні команди:</span>\n  about     хто я\n  projects  мої роботи\n  open vidvazhni | open pureheart\n  skills    що я вмію\n  ai        як я працюю з AI\n  hire      замовити проєкт\n  theme     змінити акцент\n  clear     очистити`,
+      help: () => `<span class="d">доступні команди:</span>\n  about     хто я\n  projects  мої роботи\n  open vidvazhni | open pureheart\n  skills    що я вмію\n  contact   як зі мною зв’язатися\n  ai        як я працюю з AI\n  hire      замовити проєкт\n  theme     змінити акцент\n  clear     очистити`,
       about: () => 'Наталія Найда — дизайнерка і фулстак-розробниця. NaidaBureau = дизайн + код + контроль.',
       projects: () => '  ▸ Відважні.PRO — застосунок для ветеранського бізнесу (2026)\n  ▸ Чисті серця Калуш — сайт ГО (2022 → редизайн 2026)\n<span class="d">наберіть open vidvazhni</span>',
       skills: () => '<span class="p">design</span>  UI/UX · брендинг · анімації\n<span class="p">front</span>   HTML · CSS · JavaScript · React\n<span class="p">back</span>    Python · Django · PostgreSQL\n<span class="p">ship</span>    GitHub · Render · WordPress · Telegram API',
       ai: () => 'AI пише чернетки і рутину швидше. Архітектуру, дизайн і фінальний код вирішую я.\n<span class="p">✓</span> кожна зміна переглянута людиною',
+      contact: () => 'email  <a href="mailto:naidadesign.int@gmail.com" style="color:var(--lime)">naidadesign.int@gmail.com</a>\nтел.   <a href="tel:+380930003743" style="color:var(--lime)">+380 93 000 37 43</a>',
       hire: () => { setTimeout(() => open('services'), 300); return '<span class="p">→</span> відкриваю Послуги.app…'; },
       theme: () => { const c = ['#D7FF3D', '#7CF3FF', '#FF9E5E', '#C3A6FF']; const cur = getComputedStyle(document.documentElement).getPropertyValue('--lime').trim().toUpperCase(); const n = c[(c.indexOf(cur) + 1) % c.length]; document.documentElement.style.setProperty('--lime', n); return `акцент змінено на ${n}`; },
       clear: () => { out.innerHTML = ''; return null; },
@@ -446,7 +446,7 @@ const init = {
     upd();
   },
   mail(w) {
-    $('[data-mail]', w).addEventListener('submit', (e) => { e.preventDefault(); toast('Чернетку збережено. Надішліть її на [your@email.com]'); });
+    $('[data-mail]', w).addEventListener('submit', (e) => { e.preventDefault(); const v = (id) => (document.getElementById(id) || {}).value || ''; const body = `Ім’я: ${v('m-name')}\nЩо створюємо: ${v('m-what')}\n\n${v('m-msg')}`; location.href = 'mailto:naidadesign.int@gmail.com?subject=' + encodeURIComponent('Проєкт з NaidaOS') + '&body=' + encodeURIComponent(body); toast('Відкриваю пошту…'); });
   },
 };
 

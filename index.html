@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta property="og:title" content="NaidaBureau — Nataliia Naida">
-<meta property="og:description" content="Design &amp; full-stack code: apps, websites, widgets.">
+<meta name="description" content="NaidaBureau — Наталія Найда, дизайнерка і фулстак-розробниця: застосунки, сайти, віджети.">
+<meta property="og:title" content="NaidaBureau">
+<meta property="og:description" content="Design &amp; fullstack code: застосунки, сайти, віджети.">
 <title>NaidaBureau</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@300;400;500;700&family=Manrope:wght@400;500;700&display=swap">
@@ -54,7 +55,8 @@ header > *{pointer-events:auto}
 .final .row{display:flex;flex-wrap:wrap;gap:12px}
 .btn{display:inline-flex;align-items:center;gap:10px;padding:17px 26px;border-radius:16px;background:var(--lime);color:#0B0B0D;font-weight:700;text-decoration:none;font-size:16px}
 .btn.g{background:#ffffff10;color:var(--paper);border:1px solid #ffffff22;backdrop-filter:blur(8px)}
-.mail{font-family:var(--f-mono);color:var(--muted);font-size:13px}
+.mail{font-family:var(--f-mono);color:var(--muted);font-size:13px;text-decoration:none}
+a.mail:hover{color:var(--paper)}
 .versions{background:linear-gradient(90deg,#070708ee 0%,#070708b3 55%,#07070840 100%);min-height:100vh;display:flex;flex-direction:column;justify-content:center;gap:26px;padding:120px max(24px,env(safe-area-inset-right)) 80px max(24px,env(safe-area-inset-left));pointer-events:auto}
 .versions .k{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;color:var(--lime);text-transform:uppercase}
 .versions h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(30px,4.4vw,60px);line-height:1.02;max-width:16ch;text-wrap:balance}
@@ -126,7 +128,8 @@ header > *{pointer-events:auto}
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:8px">
       <button class="btn" type="button" id="copy" style="border:0;cursor:pointer;font:inherit;font-weight:700">Скопіювати email →</button>
-      <span class="mail" id="mailtxt">[your@email.com]</span>
+      <a class="mail" id="mailtxt" href="mailto:naidadesign.int@gmail.com">naidadesign.int@gmail.com</a>
+      <a class="mail" href="tel:+380930003743">+380 93 000 37 43</a>
       <a href="concepts.html" style="font-family:var(--f-mono);font-size:13px;color:var(--muted);margin-left:auto">Усі концепції →</a>
     </div>
   </section>

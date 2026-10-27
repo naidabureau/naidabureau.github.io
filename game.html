@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta property="og:title" content="NaidaBureau — Nataliia Naida">
-<meta property="og:description" content="Design &amp; full-stack code: apps, websites, widgets.">
+<meta name="description" content="NaidaBureau — Наталія Найда, дизайнерка і фулстак-розробниця: застосунки, сайти, віджети.">
+<meta property="og:title" content="NaidaBureau">
+<meta property="og:description" content="Design &amp; fullstack code: застосунки, сайти, віджети.">
 <title>Naida Quest</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@300;400;500;700&family=Manrope:wght@400;500;700&display=swap">
 <style>
@@ -260,7 +261,7 @@ button{font:inherit;color:inherit}
         <a class="item" href="https://vidvazhni-pro-app.onrender.com" target="_blank" rel="noopener"><div class="im"><img src="works/vidvazhni-home-dark.jpg" alt="Відважні.PRO"></div><div class="tx"><span class="r">ЛЕГЕНДАРНИЙ · ЗАСТОСУНОК</span><b>Відважні.PRO</b><span>Застосунок для ветеранського бізнесу · 2026</span></div></a>
         <a class="item" href="https://pureheartskalush.com" target="_blank" rel="noopener"><div class="im"><img src="works/pureheart-hero.jpg" alt="Чисті серця Калуш"></div><div class="tx"><span class="r">РІДКІСНИЙ · САЙТ</span><b>Чисті серця Калуш</b><span>Сайт ГО · 2022 → редизайн 2026</span></div></a>
         <div class="item cta"><div style="display:flex;flex-direction:column;gap:10px"><span class="r" style="color:var(--ink)">НАСТУПНИЙ РІВЕНЬ</span><b>Ваш проєкт</b><span>Напишіть — і зберемо його разом.</span></div>
-          <div class="copy"><code id="mail">[your@email.com]</code><button type="button" id="cp">Копіювати</button></div></div>
+          <div class="copy"><code id="mail">naidadesign.int@gmail.com</code><button type="button" id="cp">Копіювати</button><a href="tel:+380930003743" style="color:var(--ink);font-weight:700;text-decoration:none">+380 93 000 37 43</a></div></div>
       </div>
       <div class="row" style="justify-content:flex-start"><button class="btn g" type="button" id="again">Зіграти ще раз</button></div>
     </div>
@@ -282,9 +283,9 @@ button{font:inherit;color:inherit}
     <button class="btn" type="submit">Сформувати заявку зі знижкою</button>
   </form>
   <div id="done" hidden style="display:flex;flex-direction:column;gap:12px">
-    <p style="margin:0;color:#CFCDD4;line-height:1.6">Заявку з кодом NAIDA20 готово. Скопіюйте її і надішліть мені на <b style="color:var(--paper)">[your@email.com]</b> — відповім з першими ідеями.</p>
+    <p style="margin:0;color:#CFCDD4;line-height:1.6">Заявку з кодом NAIDA20 готово. Скопіюйте її і надішліть мені на <a href="mailto:naidadesign.int@gmail.com" style="color:var(--paper);font-weight:700">naidadesign.int@gmail.com</a> або зателефонуйте <a href="tel:+380930003743" style="color:var(--paper);font-weight:700">+380 93 000 37 43</a> — відповім з першими ідеями.</p>
     <pre id="otext"></pre>
-    <div class="row" style="justify-content:flex-start"><button class="btn" type="button" id="ocopy">Скопіювати заявку</button><button class="btn g" type="button" id="oback">Змінити</button></div>
+    <div class="row" style="justify-content:flex-start"><a class="btn" id="osend" href="#">Надіслати на пошту</a><button class="btn g" type="button" id="ocopy">Скопіювати заявку</button><button class="btn g" type="button" id="oback">Змінити</button></div>
   </div>
 </div></div>
 <canvas id="confetti" aria-hidden="true"></canvas>
@@ -534,6 +535,7 @@ $('#cp').onclick = async () => { const t = $('#mail').textContent; try { await n
     $('#otext').textContent = t; $('#order').hidden = true; $('#done').hidden = false; $('#ocopy').focus();
   });
   $('#oback').onclick = () => { $('#order').hidden = false; $('#done').hidden = true; };
+  $('#osend').onclick = (e) => { e.preventDefault(); location.href = 'mailto:naidadesign.int@gmail.com?subject=' + encodeURIComponent('Знижка NAIDA20 · Naida Quest') + '&body=' + encodeURIComponent($('#otext').textContent); };
   $('#ocopy').onclick = async () => { try { await navigator.clipboard.writeText($('#otext').textContent); $('#ocopy').textContent = 'Скопійовано ✓'; } catch { const r = document.createRange(); r.selectNodeContents($('#otext')); getSelection().removeAllRanges(); getSelection().addRange(r); $('#ocopy').textContent = 'Текст виділено'; } };
   // запускаємо рух, коли фінал видно
   new MutationObserver(() => { if ($('#L5').classList.contains('on')) { if (!raf) { requestAnimationFrame(() => { center(); last = 0; raf = requestAnimationFrame(step); }); } } else if (raf) { cancelAnimationFrame(raf); raf = 0; } }).observe($('#L5'), { attributes: true, attributeFilter: ['class'] });
