@@ -17,6 +17,7 @@
 <meta property="og:image:alt" content="NaidaBureau — Design &amp; fullstack code">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://naidabureau.github.io/og-image.jpg">
+<script src="i18n.js"></script>
 <title>Naida Quest</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@300;400;500;700&family=Manrope:wght@400;500;700&display=swap">
 <style>
@@ -203,6 +204,7 @@ button{font:inherit;color:inherit}
   <span class="xp" aria-live="polite">XP <b id="xp">0</b></span>
   <button class="skipg" type="button" id="skipAll">Пропустити</button>
   <a href="index.html">← головна</a>
+  <button type="button" data-lang style="font-size:11px;padding:4px 8px"></button>
 </header>
 
 <main id="arena">
@@ -548,7 +550,7 @@ $('#cp').onclick = async () => { const t = $('#mail').textContent; try { await n
     $('#otext').textContent = t; $('#order').hidden = true; $('#done').hidden = false; $('#ocopy').focus();
   });
   $('#oback').onclick = () => { $('#order').hidden = false; $('#done').hidden = true; };
-  $('#osend').onclick = (e) => { e.preventDefault(); location.href = 'mailto:naidadesign.int@gmail.com?subject=' + encodeURIComponent('Знижка NAIDA20 · Naida Quest') + '&body=' + encodeURIComponent($('#otext').textContent); };
+  $('#osend').onclick = (e) => { e.preventDefault(); location.href = 'mailto:naidadesign.int@gmail.com?subject=' + encodeURIComponent((window.T || String)('Знижка NAIDA20 · Naida Quest')) + '&body=' + encodeURIComponent($('#otext').textContent); };
   $('#ocopy').onclick = async () => { try { await navigator.clipboard.writeText($('#otext').textContent); $('#ocopy').textContent = 'Скопійовано ✓'; } catch { const r = document.createRange(); r.selectNodeContents($('#otext')); getSelection().removeAllRanges(); getSelection().addRange(r); $('#ocopy').textContent = 'Текст виділено'; } };
   // запускаємо рух, коли фінал видно
   new MutationObserver(() => { if ($('#L5').classList.contains('on')) { if (!raf) { requestAnimationFrame(() => { center(); last = 0; raf = requestAnimationFrame(step); }); } } else if (raf) { cancelAnimationFrame(raf); raf = 0; } }).observe($('#L5'), { attributes: true, attributeFilter: ['class'] });

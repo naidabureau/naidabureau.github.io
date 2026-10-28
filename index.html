@@ -17,6 +17,7 @@
 <meta property="og:image:alt" content="NaidaBureau — Design &amp; fullstack code">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://naidabureau.github.io/og-image.jpg">
+<script src="i18n.js"></script>
 <title>NaidaBureau</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@300;400;500;700&family=Manrope:wght@400;500;700&display=swap">
@@ -46,6 +47,7 @@ header > *{pointer-events:auto}
 .nav a:hover,.nav a:focus-visible{color:var(--paper);background:#ffffff14}
 .nav a.cta{background:var(--lime);color:#0B0B0D;margin-left:6px}
 .nav a.cta:hover{background:var(--paper)}
+.nav .lang{margin-left:6px;color:#CFCDD4}
 .nav .sep{width:1px;height:16px;background:#ffffff26;margin:0 6px}
 .burger{display:none;position:relative;z-index:2;font-family:var(--f-mono);font-size:12px;color:var(--paper);background:#ffffff12;border:1px solid #ffffff26;border-radius:999px;padding:9px 14px;cursor:pointer;backdrop-filter:blur(8px)}
 .logo{position:relative;z-index:2}
@@ -57,6 +59,7 @@ header > *{pointer-events:auto}
   .nav a:hover{color:var(--lime)}
   .nav a.cta{background:none;color:var(--lime);margin:14px 0 0}
   .nav .sep{display:none}
+  .nav .lang{order:10;margin:22px 0 0;font-size:15px;padding:10px 14px}
   header.open .nav{opacity:1;visibility:visible}
 }
 .dots a{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--muted);display:block;transition:all .3s}
@@ -127,6 +130,7 @@ a.mail:hover{color:var(--paper)}
   <nav class="nav" id="nav" aria-label="Головне меню">
     <a href="projects.html">Проєкти</a><span class="sep" aria-hidden="true"></span>
     <a href="os.html">NaidaOS</a><a href="editor.html">Живий редактор</a><a href="game.html">Naida Quest</a>
+    <button class="lang" type="button" data-lang></button>
     <a class="cta" href="contacts.html">Контакти</a>
   </nav>
   <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="nav">Меню</button>
