@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="description" content="Проєкти NaidaBureau: платформа Відважні, сайт Чисті серця Калуш та інтерактивні версії портфоліо.">
+<meta property="og:title" content="NaidaBureau — проєкти">
+<meta property="og:description" content="Design &amp; fullstack code: застосунки, сайти, віджети.">
+<title>NaidaBureau — проєкти</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@300;400;500;700&family=Manrope:wght@400;500;700&display=swap">
+<style>
+/* Сторінка проєктів. Щоб додати новий проєкт — скопіюйте блок <article class="proj"> і змініть тексти й картинки */
+:root{
+  --ink:#070708; --paper:#F4F2EC; --muted:#A3A1AA; --lime:#D7FF3D; --line:#2A2A30;
+  --f-display:'Dela Gothic One','Arial Black',sans-serif; --f-body:'Manrope',system-ui,sans-serif; --f-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--f-body);overflow-x:hidden}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+img{max-width:100%}
+.wrap{max-width:1240px;margin:0 auto;padding:0 max(24px,env(safe-area-inset-left))}
+
+/* шапка — така сама, як на головній */
+header{position:fixed;left:0;right:0;top:0;z-index:20;display:flex;align-items:center;gap:20px;justify-content:space-between;
+  padding:18px max(20px,env(safe-area-inset-right)) 18px max(20px,env(safe-area-inset-left));background:linear-gradient(#070708 40%,#07070800)}
+.logo{position:relative;z-index:2;display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-size:16px;color:var(--paper);text-decoration:none}
+.logo .m{display:flex;align-items:center;font-size:22px;line-height:1}
+.logo i{font-family:var(--f-mono);font-weight:300;font-style:normal;color:var(--lime)}
+.nav{display:flex;gap:2px;align-items:center;font-family:var(--f-mono);font-size:12px;padding:4px;border-radius:999px;background:#0b0b0dcc;border:1px solid #ffffff1a;backdrop-filter:blur(12px)}
+.nav a{color:#CFCDD4;padding:9px 13px;border-radius:999px;text-decoration:none;transition:color .2s,background .2s;white-space:nowrap}
+.nav a:hover,.nav a:focus-visible{color:var(--paper);background:#ffffff14}
+.nav a[aria-current]{color:var(--lime)}
+.nav a.cta{background:var(--lime);color:#0B0B0D;margin-left:6px}
+.nav a.cta:hover{background:var(--paper)}
+.nav .sep{width:1px;height:16px;background:#ffffff26;margin:0 6px}
+.burger{display:none;position:relative;z-index:2;font-family:var(--f-mono);font-size:12px;color:var(--paper);background:#ffffff12;border:1px solid #ffffff26;border-radius:999px;padding:9px 14px;cursor:pointer}
+@media (max-width:920px){
+  .burger{display:block}
+  .nav{position:fixed;inset:0;z-index:1;border:0;border-radius:0;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;padding:90px 28px 40px;background:#070708f5;backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+  .nav a{font-family:var(--f-display);font-size:clamp(30px,8vw,46px);color:var(--paper);padding:6px 0;background:none!important;line-height:1.1}
+  .nav a.cta{background:none;color:var(--lime);margin:14px 0 0}
+  .nav .sep{display:none}
+  header.open .nav{opacity:1;visibility:visible}
+}
+
+/* вступ */
+.hero{padding:150px 0 40px;position:relative}
+.k{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;color:var(--lime);text-transform:uppercase}
+h1{margin:16px 0 0;font-family:var(--f-display);font-weight:400;font-size:clamp(44px,8vw,120px);line-height:.95;letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--lime)}
+.lead{margin:24px 0 0;max-width:58ch;color:#CFCDD4;font-size:18px;line-height:1.6}
+.index{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+.index a{font-family:var(--f-mono);font-size:13px;color:var(--paper);text-decoration:none;padding:10px 16px;border:1px solid #ffffff26;border-radius:999px;transition:border-color .2s,color .2s}
+.index a:hover{border-color:var(--lime);color:var(--lime)}
+
+/* проєкт */
+.proj{--acc:var(--lime);padding:90px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.5fr);gap:56px;align-items:start}
+.proj .info{position:sticky;top:110px;display:flex;flex-direction:column;gap:18px}
+.proj .num{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.proj h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(34px,4.4vw,58px);line-height:1}
+.proj h2 span{color:var(--acc)}
+.proj p{margin:0;color:#CFCDD4;font-size:16px;line-height:1.65}
+.meta{font-family:var(--f-mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
+.status{display:inline-flex;align-items:center;gap:9px;font-size:14px;color:var(--acc)}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--acc);animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--f-mono);font-size:12px;padding:7px 11px;border-radius:999px;border:1px solid #ffffff22;color:#DAD8DE}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 22px;border-radius:14px;background:var(--acc);color:#0B0B0D;font-weight:700;text-decoration:none;font-size:15px;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.g{background:#ffffff10;color:var(--paper);border:1px solid #ffffff22}
+ul.feat{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+ul.feat li{display:flex;gap:10px;font-size:15px;line-height:1.5;color:#DAD8DE}
+ul.feat li::before{content:"→";font-family:var(--f-mono);color:var(--acc)}
+
+/* медіа */
+.media{display:flex;flex-direction:column;gap:22px;min-width:0}
+.browser{border-radius:16px;overflow:hidden;background:#111114;border:1px solid #ffffff1c;box-shadow:0 40px 80px #000a}
+.browser .bar{height:36px;display:flex;align-items:center;gap:7px;padding:0 14px;background:#18181c;border-bottom:1px solid #ffffff12}
+.browser .bar i{width:10px;height:10px;border-radius:50%;background:#2e2e35}
+.browser .bar span{margin-left:12px;font-family:var(--f-mono);font-size:11px;color:var(--muted);background:#0e0e11;border-radius:6px;padding:4px 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.browser img{display:block;width:100%}
+/* «відео»: сторінка сама прокручується всередині вікна */
+.scroller{height:440px;overflow:hidden;position:relative}
+.scroller img{animation:scrollpage 22s ease-in-out infinite alternate}
+.scroller:hover img{animation-play-state:paused}
+@keyframes scrollpage{0%,8%{transform:translateY(0)}92%,100%{transform:translateY(calc(-100% + 440px))}}
+.phones{display:flex;gap:18px;justify-content:center;align-items:flex-start;padding:10px 0}
+.phone{flex:1;max-width:220px;border-radius:30px;padding:7px;background:#1b1b20;border:1px solid #ffffff1c;box-shadow:0 30px 60px #000c;animation:float 6s ease-in-out infinite}
+.phone img{display:block;width:100%;border-radius:24px}
+.phone:nth-child(2){animation-delay:-2s;margin-top:40px}
+.phone:nth-child(3){animation-delay:-4s}
+@keyframes float{50%{transform:translateY(-12px)}}
+.duo{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,.7fr);gap:18px;align-items:end}
+.duo .phone{max-width:none}
+.cap{font-family:var(--f-mono);font-size:12px;color:var(--muted);text-align:center}
+[data-zoom]{cursor:zoom-in}
+
+/* інтерактивні версії */
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+.v{display:flex;flex-direction:column;gap:12px;padding:24px;border-radius:22px;background:#0b0b0d;border:1px solid #ffffff1f;color:var(--paper);text-decoration:none;transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .25s}
+.v:hover,.v:focus-visible{transform:translateY(-6px);border-color:var(--lime);outline:none}
+.v .n{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.v b{font-family:var(--f-display);font-weight:400;font-size:26px;line-height:1.05}
+.v span{color:#CFCDD4;font-size:14px;line-height:1.55}
+.v em{margin-top:auto;font-style:normal;font-family:var(--f-mono);font-size:13px;color:var(--lime)}
+.sec-h{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.sec-h h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(30px,4vw,52px);line-height:1}
+
+/* заклик */
+.cta-box{margin:90px 0 60px;padding:clamp(28px,5vw,64px);border-radius:28px;background:var(--lime);color:#0B0B0D;display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between}
+.cta-box h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(32px,5vw,68px);line-height:.98;max-width:12ch}
+.cta-box a{display:inline-flex;padding:17px 26px;border-radius:16px;background:#0B0B0D;color:var(--paper);font-weight:700;text-decoration:none}
+footer{padding:0 0 40px;font-family:var(--f-mono);font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
+footer a{color:var(--muted)}
+
+/* збільшення картинок */
+.lb{position:fixed;inset:0;z-index:50;background:#000e;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;cursor:zoom-out}
+.lb.on{opacity:1;visibility:visible}
+.lb img{max-width:min(1400px,100%);max-height:100%;border-radius:12px;box-shadow:0 30px 80px #000}
+
+/* поява під час прокрутки */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .proj{grid-template-columns:minmax(0,1fr);gap:34px;padding:64px 0}
+  .proj .info{position:static}
+  .scroller{height:340px}
+  @keyframes scrollpage{0%,8%{transform:translateY(0)}92%,100%{transform:translateY(calc(-100% + 340px))}}
+}
+@media (max-width:560px){
+  .hero{padding-top:120px}
+  .lead{font-size:16px}
+  .phones{gap:10px}
+  .phone{border-radius:22px;padding:5px}
+  .phone img{border-radius:18px}
+  .phone:nth-child(2){margin-top:24px}
+  .duo{grid-template-columns:minmax(0,1fr)}
+  .duo .phone{max-width:220px;margin:0 auto}
+}
+@media (prefers-reduced-motion: reduce){
+  .scroller img,.phone,.status::before{animation:none}
+  .rv{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="index.html"><span class="m"><i>&lt;</i>N<i>/&gt;</i></span> NAIDA BUREAU</a>
+  <nav class="nav" id="nav" aria-label="Головне меню">
+    <a href="projects.html" aria-current="page">Проєкти</a><span class="sep" aria-hidden="true"></span>
+    <a href="os.html">NaidaOS</a><a href="editor.html">Живий редактор</a><a href="game.html">Naida Quest</a>
+    <a class="cta" href="contacts.html">Контакти</a>
+  </nav>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="nav">Меню</button>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <span class="k">Проєкти · 2022 → 2026</span>
+    <h1>Роботи, які<br>вже <em>живуть</em></h1>
+    <p class="lead">Кожен проєкт — від ідеї й дизайну до коду, запуску і підтримки. Нижче — що це, як воно виглядає і що всередині.</p>
+    <nav class="index" aria-label="Проєкти на сторінці">
+      <a href="#vidvazhni">01 Відважні</a><a href="#pureheart">02 Чисті серця Калуш</a><a href="#interactive">03 Інтерактивні версії</a>
+    </nav>
+  </section>
+
+  <!-- ПРОЄКТ 1 · ВІДВАЖНІ -->
+  <article class="proj" id="vidvazhni" style="--acc:#D4AF6B">
+    <div class="info rv">
+      <span class="num">01</span>
+      <h2>Від<span>важні</span></h2>
+      <span class="meta">ПЛАТФОРМА · МОБІЛЬНИЙ ЗАСТОСУНОК + ВЕБ · 2026</span>
+      <span class="status">Уже працює · активно доопрацьовується</span>
+      <p>Платформа для ветеранського бізнесу. Об’єднує бізнеси ветеранів, ветеранок та їхніх родин: людей знаходять у каталозі й на карті, а ветерани публікують вакансії та оголошення, дізнаються про гранти й навчання, спілкуються зі спільнотою. Кожен бізнес перевіряє модератор.</p>
+      <ul class="feat">
+        <li>Каталог і карта перевірених бізнесів</li>
+        <li>Вакансії, оголошення, підтримка, гранти, події</li>
+        <li>Реклама бізнесів за областю та анімовані банери</li>
+        <li>Мобільний застосунок (PWA) і веб-версія</li>
+      </ul>
+      <div class="chips"><span class="chip">Python · Django</span><span class="chip">PostgreSQL</span><span class="chip">Cloudinary</span><span class="chip">Telegram API</span><span class="chip">monobank</span><span class="chip">OpenFreeMap</span><span class="chip">PWA</span></div>
+      <span class="meta">МОЯ РОЛЬ: ДИЗАЙН І ФУЛСТАК-РОЗРОБКА</span>
+      <div class="btns"><a class="btn" href="https://vidvazhni-pro-app.onrender.com" target="_blank" rel="noopener">Відкрити платформу ↗</a></div>
+    </div>
+    <div class="media">
+      <div class="browser rv"><div class="bar"><i></i><i></i><i></i><span>Відважні · веб-версія</span></div><img data-zoom src="works/vidvazhni-web-home.jpg" alt="Відважні — головна сторінка веб-версії" loading="lazy"></div>
+      <div class="phones rv">
+        <div class="phone"><img data-zoom src="works/vidvazhni-home-light.jpg" alt="Застосунок Відважні — головна, світла тема" loading="lazy"></div>
+        <div class="phone"><img data-zoom src="works/vidvazhni-home-dark.jpg" alt="Застосунок Відважні — головна, темна тема" loading="lazy"></div>
+        <div class="phone"><img data-zoom src="works/vidvazhni-catalog-dark.jpg" alt="Застосунок Відважні — каталог бізнесів" loading="lazy"></div>
+      </div>
+      <div class="cap">мобільний застосунок · світла й темна тема · каталог</div>
+    </div>
+  </article>
+
+  <!-- ПРОЄКТ 2 · ЧИСТІ СЕРЦЯ КАЛУШ -->
+  <article class="proj" id="pureheart" style="--acc:#F0566A">
+    <div class="info rv">
+      <span class="num">02</span>
+      <h2>Чисті <span>серця</span> Калуш</h2>
+      <span class="meta">САЙТ ГРОМАДСЬКОЇ ОРГАНІЗАЦІЇ · 2022 → РЕДИЗАЙН 2026</span>
+      <p>Сайт організації, яка з 2018 року допомагає ветеранам, військовим, родинам загиблих і зниклих безвісти та внутрішньо переміщеним особам: гуманітарна, психологічна та юридична підтримка.</p>
+      <p>Концепція — українська вишивка хрестиком: серце, вишите хрестик за хрестиком, червона нитка через усі сторінки і приховані сердечка з історіями людей.</p>
+      <ul class="feat">
+        <li>Анімоване вишите серце і нитка через сторінку</li>
+        <li>Історія організації рік за роком</li>
+        <li>Чотири напрями допомоги, новини, команда</li>
+        <li>Реквізити з копіюванням в один дотик</li>
+      </ul>
+      <div class="chips"><span class="chip">WordPress</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">Анімації</span><span class="chip">Мобільна версія</span></div>
+      <span class="meta">МОЯ РОЛЬ: ДИЗАЙН І РОЗРОБКА</span>
+      <div class="btns"><a class="btn" href="https://pureheartskalush.com" target="_blank" rel="noopener">Відкрити сайт ↗</a></div>
+    </div>
+    <div class="media">
+      <div class="browser rv"><div class="bar"><i></i><i></i><i></i><span>pureheartskalush.com</span></div><img data-zoom src="works/pureheart-desktop.jpg" alt="Чисті серця Калуш — головна сторінка" loading="lazy"></div>
+      <div class="duo rv">
+        <div class="browser"><div class="bar"><i></i><i></i><i></i><span>уся сторінка</span></div><div class="scroller"><img src="works/pureheart-long.jpg" alt="Сайт Чисті серця Калуш — уся сторінка, прокручується" loading="lazy"></div></div>
+        <div class="phone"><img data-zoom src="works/pureheart-mobile.jpg" alt="Чисті серця Калуш — мобільна версія" loading="lazy"></div>
+      </div>
+      <div class="cap">сторінка прокручується сама · наведіть, щоб зупинити</div>
+    </div>
+  </article>
+
+  <!-- ІНТЕРАКТИВНІ ВЕРСІЇ ПОРТФОЛІО -->
+  <section class="proj" id="interactive" style="display:block">
+    <div class="sec-h rv"><span class="k">03 · Експерименти</span><h2>Відчуйте себе розробником і дизайнером</h2><p style="max-width:60ch">Три інтерактивні версії цього портфоліо — теж мої проєкти: власна операційна система, живий редактор і гра.</p></div>
+    <div class="vgrid rv">
+      <a class="v" href="os.html"><span class="n">Операційна система</span><b>NaidaOS</b><span>Вікна, які можна пересувати, термінал з командами і проєкти, що відкриваються як програми.</span><em>Запустити →</em></a>
+      <a class="v" href="editor.html"><span class="n">Редактор</span><b>Живий редактор</b><span>Змініть дизайн сторінки самі й подивіться, як наживо оновлюється код.</span><em>Відкрити →</em></a>
+      <a class="v" href="game.html"><span class="n">Гра</span><b>Naida Quest</b><span>День із життя дизайнерки й розробниці: ідея, дизайн, код, запуск. Наприкінці — приз.</span><em>Зіграти →</em></a>
+    </div>
+  </section>
+
+  <section class="cta-box rv">
+    <h2>Маєте ідею? Обговоримо.</h2>
+    <a href="contacts.html">Зв’язатися →</a>
+  </section>
+  <footer><span>© NaidaBureau · Design &amp; fullstack code</span><a href="index.html">← на головну</a></footer>
+</main>
+
+<div class="lb" id="lb" role="dialog" aria-label="Збільшене зображення"><img alt=""></div>
+
+<script>
+// меню на телефоні
+const hd = document.querySelector('header'), bg = document.getElementById('burger');
+const setMenu = (o) => { hd.classList.toggle('open', o); bg.setAttribute('aria-expanded', o); bg.textContent = o ? 'Закрити' : 'Меню'; document.body.style.overflow = o ? 'hidden' : ''; };
+bg.onclick = () => setMenu(!hd.classList.contains('open'));
+document.querySelectorAll('#nav a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+// збільшення картинок
+const lb = document.getElementById('lb'), lbi = lb.querySelector('img');
+document.querySelectorAll('[data-zoom]').forEach((im) => im.addEventListener('click', () => { lbi.src = im.src; lbi.alt = im.alt; lb.classList.add('on'); }));
+lb.onclick = () => lb.classList.remove('on');
+addEventListener('keydown', (e) => { if (e.key === 'Escape') { lb.classList.remove('on'); setMenu(false); } });
+// поява блоків під час прокрутки
+const io = 'IntersectionObserver' in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 }) : null;
+document.querySelectorAll('.rv').forEach((el) => io ? io.observe(el) : el.classList.add('in'));
+</script>
+</body>
+</html>

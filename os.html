@@ -230,8 +230,8 @@ button{font:inherit;color:inherit}
     </div>
     <div class="right">
       <span class="ai" title="AI-асистент працює під моїм контролем">AI: під контролем</span>
-      <span id="clock">Київ --:--</span>
-      <a class="back" href="./">← головна</a>
+      <span id="clock"> --:--</span>
+      <a class="back" href="index.html">← головна</a>
     </div>
   </div>
 
@@ -253,8 +253,8 @@ const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&l
 /* ---------- програми ---------- */
 const APPS = {
   projects: { name: 'Проєкти', g: 'g-proj', glyph: '▤', w: 640, h: 420 },
-  vidvazhni: { name: 'Відважні.PRO', g: 'g-vid', glyph: 'В', w: 620, h: 560 },
-  pureheart: { name: 'Чисті серця', g: 'g-ph', glyph: '♥', w: 680, h: 560 },
+  vidvazhni: { name: 'Відважні', g: 'g-vid', glyph: 'В', w: 620, h: 560 },
+  pureheart: { name: 'Чисті серця Калуш', g: 'g-ph', glyph: '♥', w: 680, h: 560 },
   terminal: { name: 'Термінал', g: 'g-term', glyph: '&gt;_', w: 560, h: 360 },
   services: { name: 'Послуги.app', g: 'g-svc', glyph: '+', w: 520, h: 560 },
   me: { name: 'Про мене.txt', g: 'g-me', glyph: 'Aa', w: 480, h: 420 },
@@ -269,16 +269,16 @@ const content = {
     <div class="finder">
       <aside><b>Усі роботи</b><span>Застосунки</span><span>Сайти</span><span>Віджети й боти</span></aside>
       <div class="files">
-        <button class="file" type="button" data-open="vidvazhni"><div class="th"><img src="works/vidvazhni-home-dark.jpg" alt=""></div>Відважні.PRO</button>
+        <button class="file" type="button" data-open="vidvazhni"><div class="th"><img src="works/vidvazhni-home-dark.jpg" alt=""></div>Відважні</button>
         <button class="file" type="button" data-open="pureheart"><div class="th"><img src="works/pureheart-hero.jpg" alt=""></div>Чисті серця Калуш</button>
       </div>
     </div>`,
   vidvazhni: () => `
     <div class="proj">
-      <div><div class="phone" id="vphone"><img src="works/vidvazhni-home-light.jpg" alt="Головний екран Відважні.PRO"><img src="works/vidvazhni-catalog-dark.jpg" alt="Каталог бізнесів" style="opacity:0"></div></div>
+      <div><div class="phone" id="vphone"><img src="works/vidvazhni-home-light.jpg" alt="Головний екран Відважні"><img src="works/vidvazhni-catalog-dark.jpg" alt="Каталог бізнесів" style="opacity:0"></div></div>
       <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
         <div class="mut" style="font-family:var(--f-mono);font-size:12px">Платформа · застосунок + веб · 2026</div>
-        <h2 class="h">Відважні.PRO</h2>
+        <h2 class="h">Відважні</h2>
         <p style="margin:0;line-height:1.6;color:#D0CED5">Платформа, що об’єднує бізнес ветеранів і ветеранок: каталог і карта, вакансії, оголошення, гранти, чат. Працює як мобільний застосунок (встановлюється на телефон без App Store) і як веб-сайт — однаково зручно на телефоні й комп’ютері.</p>
         <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--amber)"><span style="width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber)"></span>Уже працює · активно доопрацьовується</div><p style="display:none"></p>
         <div class="seg" role="group" aria-label="Екран"><button type="button" aria-pressed="true" data-scr="0">Головна</button><button type="button" aria-pressed="false" data-scr="1">Каталог</button></div>
@@ -408,7 +408,7 @@ const init = {
     const CMD = {
       help: () => `<span class="d">доступні команди:</span>\n  about     хто я\n  projects  мої роботи\n  open vidvazhni | open pureheart\n  skills    що я вмію\n  contact   як зі мною зв’язатися\n  ai        як я працюю з AI\n  hire      замовити проєкт\n  theme     змінити акцент\n  clear     очистити`,
       about: () => 'Наталія Найда — дизайнерка і фулстак-розробниця. NaidaBureau = дизайн + код + контроль.',
-      projects: () => '  ▸ Відважні.PRO — платформа для ветеранського бізнесу: застосунок + веб (2026, працює й доопрацьовується)\n  ▸ Чисті серця Калуш — сайт ГО (2022 → редизайн 2026)\n<span class="d">наберіть open vidvazhni</span>',
+      projects: () => '  ▸ Відважні — платформа для ветеранського бізнесу: застосунок + веб (2026, працює й доопрацьовується)\n  ▸ Чисті серця Калуш — сайт ГО (2022 → редизайн 2026)\n<span class="d">наберіть open vidvazhni</span>',
       skills: () => '<span class="p">design</span>  UI/UX · брендинг · анімації\n<span class="p">front</span>   HTML · CSS · JavaScript · React\n<span class="p">back</span>    Python · Django · PostgreSQL\n<span class="p">ship</span>    GitHub · Render · WordPress · Telegram API',
       ai: () => 'AI пише чернетки і рутину швидше. Архітектуру, дизайн і фінальний код вирішую я.\n<span class="p">✓</span> кожна зміна переглянута людиною',
       contact: () => 'email  <a href="mailto:naidadesign.int@gmail.com" style="color:var(--lime)">naidadesign.int@gmail.com</a>\nтел.   <a href="tel:+380930003743" style="color:var(--lime)">+380 93 000 37 43</a>',
@@ -453,13 +453,13 @@ const init = {
 
 /* ---------- дрібниці ---------- */
 let tt; function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('on'), 2600); }
-function clock() { $('#clock').textContent = 'Київ ' + new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Kyiv' }); }
+function clock() { $('#clock').textContent = 'Івано-Франківськ ' + new Date().toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Kyiv' }); }
 clock(); setInterval(clock, 15000);
 { const hd = document.getElementById('hdate'); if (hd) hd.textContent = new Date().toLocaleDateString('uk-UA', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Kyiv' }); }
 
 /* ---------- завантаження ---------- */
 const boot = $('#boot'), log = $('#bootlog');
-const LINES = [['NaidaOS 1.0 · Kyiv build', ''], ['завантаження design.kit', 'ok'], ['завантаження fullstack.core', 'ok'], ['підключення AI-асистента', 'ok · під контролем'], ['перевірка якості людиною', 'ok'], ['запуск робочого столу', '']];
+const LINES = [['NaidaOS 1.0 · Ivano-Frankivsk build', ''], ['завантаження design.kit', 'ok'], ['завантаження fullstack.core', 'ok'], ['підключення AI-асистента', 'ok · під контролем'], ['перевірка якості людиною', 'ok'], ['запуск робочого столу', '']];
 let done = false;
 function finish() {
   if (done) return; done = true;

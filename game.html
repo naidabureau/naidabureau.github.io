@@ -193,7 +193,7 @@ button{font:inherit;color:inherit}
   <span class="timer" aria-label="Час">⏱ <b id="tm">0:00</b></span>
   <span class="xp" aria-live="polite">XP <b id="xp">0</b></span>
   <button class="skipg" type="button" id="skipAll">Пропустити</button>
-  <a href="./">← головна</a>
+  <a href="index.html">← головна</a>
 </header>
 
 <main id="arena">
@@ -252,13 +252,13 @@ button{font:inherit;color:inherit}
       <span style="font-family:var(--f-mono);font-size:12px;color:var(--lime);letter-spacing:.14em" id="fk">ГРУ ПРОЙДЕНО</span>
       <h2 id="fh">Ви щойно пройшли мій робочий день.</h2>
       <div class="result" id="result"><div class="stat rank"><span>ВАШ РІВЕНЬ</span><b id="rank">—</b></div><div class="stat"><span>ДОСВІД</span><b><span id="xpf" style="font:inherit;color:inherit;letter-spacing:0">0</span> XP</b></div><div class="stat"><span>ЧАС</span><b id="tf">0:00</b></div></div>
-      <p style="margin:0;max-width:60ch;color:#CFCDD4;font-size:17px;line-height:1.6">Ідея, дизайн, код з AI і запуск під моїм контролем — так я роблю кожен проєкт. Ось що відкрилося:</p>
+      <p style="margin:0;max-width:60ch;color:#CFCDD4;font-size:17px;line-height:1.6">Ідея, дизайн, код і запуск під моїм контролем — так я роблю кожен проєкт. Ось що відкрилося:</p>
       <div class="catch" id="catch" aria-label="Зловіть знижку">
         <span class="lab">бонус за проходження · спробуйте натиснути</span>
         <button type="button" class="deal" id="deal">Лови −20%<small>на мої послуги</small></button>
       </div>
       <div class="loot">
-        <a class="item" href="https://vidvazhni-pro-app.onrender.com" target="_blank" rel="noopener"><div class="im"><img src="works/vidvazhni-home-dark.jpg" alt="Відважні.PRO"></div><div class="tx"><span class="r">ЛЕГЕНДАРНИЙ · ПЛАТФОРМА</span><b>Відважні.PRO</b><span>Платформа для ветеранського бізнесу: застосунок + веб · працює, доопрацьовується</span></div></a>
+        <a class="item" href="https://vidvazhni-pro-app.onrender.com" target="_blank" rel="noopener"><div class="im"><img src="works/vidvazhni-home-dark.jpg" alt="Відважні"></div><div class="tx"><span class="r">ЛЕГЕНДАРНИЙ · ПЛАТФОРМА</span><b>Відважні</b><span>Платформа для ветеранського бізнесу: застосунок + веб · працює, доопрацьовується</span></div></a>
         <a class="item" href="https://pureheartskalush.com" target="_blank" rel="noopener"><div class="im"><img src="works/pureheart-hero.jpg" alt="Чисті серця Калуш"></div><div class="tx"><span class="r">РІДКІСНИЙ · САЙТ</span><b>Чисті серця Калуш</b><span>Сайт ГО · 2022 → редизайн 2026</span></div></a>
         <div class="item cta"><div style="display:flex;flex-direction:column;gap:10px"><span class="r" style="color:var(--ink)">НАСТУПНИЙ РІВЕНЬ</span><b>Ваш проєкт</b><span>Напишіть — і зберемо його разом.</span></div>
           <div class="copy"><code id="mail">naidadesign.int@gmail.com</code><button type="button" id="cp">Копіювати</button><a href="tel:+380930003743" style="color:var(--ink);font-weight:700;text-decoration:none">+380 93 000 37 43</a></div></div>
@@ -405,7 +405,7 @@ function startL2() {
     if (p.classList.contains('placed')) return;
     slot.classList.add('ok'); slot.textContent = ''; p.classList.add('placed'); p.style.position = ''; p.style.left = p.style.top = ''; p.style.zIndex = '';
     p.style.width = '100%'; p.style.height = '100%'; slot.appendChild(p); addXP(15, x, y); placed++;
-    if (placed === 3) { ph.style.background = '#0B0B0D'; setTimeout(() => card('ДИЗАЙН ГОТОВИЙ · +50 XP', 'Дизайн — моя зона', 'Кожен блок стоїть там, де людині зручно. Це я вирішую сама, а не нейромережа.', () => { addXP(50); show(3); }), 500); }
+    if (placed === 3) { ph.style.background = '#0B0B0D'; setTimeout(() => card('ДИЗАЙН ГОТОВИЙ · +50 XP', 'Дизайн — моя зона', 'Кожен блок стоїть там, де людині зручно.', () => { addXP(50); show(3); }), 500); }
   }
 }
 
@@ -429,7 +429,7 @@ function startL3() {
   box.onclick = (e) => {
     const b = e.target.closest('.ln'); if (!b || b.classList.contains('fixed')) return; const l = CODE[+b.dataset.i]; const r = b.getBoundingClientRect();
     if (l[1]) { b.classList.add('fixed'); b.classList.remove('hint'); b.querySelector('.code').textContent = l[2]; found++; $('#c3').textContent = found; addXP(20, r.right - 80, r.top);
-      if (found === 3) setTimeout(() => card('КОД ПЕРЕВІРЕНО · +50 XP', 'AI пише — я перевіряю', 'Друкарська помилка, неправильна логіка і найголовніше: хто відповідає за код. Відповідаю я.', () => { addXP(50); show(4); }), 500);
+      if (found === 3) setTimeout(() => card('КОД ПЕРЕВІРЕНО · +50 XP', 'AI пише — я перевіряю', 'Друкарська помилка, неправильна логіка... перед запуском все проходить перевірку та тести', () => { addXP(50); show(4); }), 500);
     } else { addXP(-5, r.right - 80, r.top); b.classList.add('shake'); setTimeout(() => b.classList.remove('shake'), 350); }
   };
   $('#hint').onclick = () => { const i = CODE.findIndex((l, k) => l[1] && !box.querySelector(`[data-i="${k}"]`).classList.contains('fixed')); if (i < 0) return; box.querySelector(`[data-i="${i}"]`).classList.add('hint'); addXP(-10); };

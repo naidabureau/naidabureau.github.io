@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="description" content="Контакти NaidaBureau: телефон, email, Telegram. Наталія Найда — дизайн і фулстак-розробка.">
+<meta property="og:title" content="NaidaBureau — контакти">
+<meta property="og:description" content="Design &amp; fullstack code: застосунки, сайти, віджети.">
+<title>NaidaBureau — контакти</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@300;400;500;700&family=Manrope:wght@400;500;700&display=swap">
+<style>
+/* Сторінка контактів. Телефон, пошту і Telegram змінюйте у блоці <div class="cards"> */
+:root{
+  --ink:#070708; --paper:#F4F2EC; --muted:#A3A1AA; --lime:#D7FF3D; --line:#2A2A30;
+  --f-display:'Dela Gothic One','Arial Black',sans-serif; --f-body:'Manrope',system-ui,sans-serif; --f-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--f-body);overflow-x:hidden}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+img{max-width:100%}
+.wrap{max-width:1240px;margin:0 auto;padding:0 max(24px,env(safe-area-inset-left))}
+
+/* шапка — така сама, як на головній */
+header{position:fixed;left:0;right:0;top:0;z-index:20;display:flex;align-items:center;gap:20px;justify-content:space-between;
+  padding:18px max(20px,env(safe-area-inset-right)) 18px max(20px,env(safe-area-inset-left));background:linear-gradient(#070708 40%,#07070800)}
+.logo{position:relative;z-index:2;display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-size:16px;color:var(--paper);text-decoration:none}
+.logo .m{display:flex;align-items:center;font-size:22px;line-height:1}
+.logo i{font-family:var(--f-mono);font-weight:300;font-style:normal;color:var(--lime)}
+.nav{display:flex;gap:2px;align-items:center;font-family:var(--f-mono);font-size:12px;padding:4px;border-radius:999px;background:#0b0b0dcc;border:1px solid #ffffff1a;backdrop-filter:blur(12px)}
+.nav a{color:#CFCDD4;padding:9px 13px;border-radius:999px;text-decoration:none;transition:color .2s,background .2s;white-space:nowrap}
+.nav a:hover,.nav a:focus-visible{color:var(--paper);background:#ffffff14}
+.nav a[aria-current]{color:var(--lime)}
+.nav a.cta{background:var(--lime);color:#0B0B0D;margin-left:6px}
+.nav a.cta:hover{background:var(--paper)}
+.nav .sep{width:1px;height:16px;background:#ffffff26;margin:0 6px}
+.burger{display:none;position:relative;z-index:2;font-family:var(--f-mono);font-size:12px;color:var(--paper);background:#ffffff12;border:1px solid #ffffff26;border-radius:999px;padding:9px 14px;cursor:pointer}
+@media (max-width:920px){
+  .burger{display:block}
+  .nav{position:fixed;inset:0;z-index:1;border:0;border-radius:0;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;padding:90px 28px 40px;background:#070708f5;backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+  .nav a{font-family:var(--f-display);font-size:clamp(30px,8vw,46px);color:var(--paper);padding:6px 0;background:none!important;line-height:1.1}
+  .nav a.cta{background:none;color:var(--lime);margin:14px 0 0}
+  .nav .sep{display:none}
+  header.open .nav{opacity:1;visibility:visible}
+}
+
+.page{min-height:100vh;min-height:100svh;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:60px;align-items:center;padding:130px 0 60px}
+.k{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;color:var(--lime);text-transform:uppercase}
+h1{margin:16px 0 0;font-family:var(--f-display);font-weight:400;font-size:clamp(46px,6.4vw,96px);line-height:.95}
+h1 em{font-style:normal;color:var(--lime)}
+.lead{margin:24px 0 0;max-width:46ch;color:#CFCDD4;font-size:18px;line-height:1.6}
+.where{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px}
+.where span{font-family:var(--f-mono);font-size:12px;padding:8px 12px;border-radius:999px;border:1px solid #ffffff22;color:#DAD8DE}
+.where span:first-child::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--lime);margin-right:8px;box-shadow:0 0 8px var(--lime)}
+.cards{display:flex;flex-direction:column;gap:12px}
+.card{position:relative;display:flex;align-items:center;gap:18px;padding:22px 22px;border-radius:20px;background:#0b0b0db3;backdrop-filter:blur(3px);border:1px solid #ffffff1f;color:var(--paper);text-decoration:none;transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .25s}
+.card:hover,.card:focus-within{border-color:var(--lime);transform:translateX(6px)}
+.card .ic{flex:none;width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:#ffffff0d;color:var(--lime)}
+.card .ic svg{width:24px;height:24px}
+.card .t{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+.card .t small{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.card .t a{color:var(--paper);text-decoration:none;font-size:clamp(17px,2vw,22px);font-weight:700;overflow-wrap:anywhere}
+.card .t a::after{content:"";position:absolute;inset:0;border-radius:20px}
+.card .t a:hover{color:var(--lime)}
+.copy{position:relative;z-index:1;flex:none;font-family:var(--f-mono);font-size:12px;color:var(--paper);background:#ffffff10;border:1px solid #ffffff22;border-radius:999px;padding:9px 13px;cursor:pointer}
+.copy:hover{border-color:var(--lime);color:var(--lime)}
+.note{margin-top:14px;font-size:14px;color:var(--muted);line-height:1.6}
+.quick{margin-top:22px;padding:22px;border-radius:20px;border:1px dashed #ffffff2a;display:flex;flex-direction:column;gap:12px}
+.quick label{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.quick textarea{width:100%;min-height:96px;resize:vertical;padding:14px;border-radius:14px;background:#0e0e11;border:1px solid #ffffff22;color:var(--paper);font:inherit;font-size:15px}
+.quick textarea:focus{outline:none;border-color:var(--lime)}
+.quick button{align-self:flex-start;padding:15px 22px;border-radius:14px;border:0;background:var(--lime);color:#0B0B0D;font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+/* частинки-знак на фоні */
+#bgN{position:fixed;inset:0;z-index:-1;width:100%;height:100%;opacity:.8;pointer-events:none}
+footer{padding:0 0 40px;font-family:var(--f-mono);font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
+footer a{color:var(--muted)}
+@media (max-width:900px){.page{grid-template-columns:minmax(0,1fr);gap:40px;padding-top:110px}}
+@media (max-width:480px){.card{padding:16px;gap:12px}.card .ic{width:42px;height:42px}.copy{padding:8px 10px}.lead{font-size:16px}}
+</style>
+</head>
+<body>
+<canvas id="bgN" aria-hidden="true"></canvas>
+<header>
+  <a class="logo" href="index.html"><span class="m"><i>&lt;</i>N<i>/&gt;</i></span> NAIDA BUREAU</a>
+  <nav class="nav" id="nav" aria-label="Головне меню">
+    <a href="projects.html">Проєкти</a><span class="sep" aria-hidden="true"></span>
+    <a href="os.html">NaidaOS</a><a href="editor.html">Живий редактор</a><a href="game.html">Naida Quest</a>
+    <a class="cta" href="contacts.html" aria-current="page">Контакти</a>
+  </nav>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="nav">Меню</button>
+</header>
+
+<main class="wrap">
+  <section class="page">
+    <div>
+      <span class="k">Контакти</span>
+      <h1>Розкажіть<br>про <em>ідею</em></h1>
+      <p class="lead">Застосунок, сайт, чат-бот чи автоматизація — напишіть або зателефонуйте. Вартість і терміни обговоримо після короткої розмови.</p>
+      <div class="where"><span>Відкрита до нових проєктів</span><span>Івано-Франківськ · працюю віддалено</span></div>
+    </div>
+    <div>
+      <div class="cards">
+        <div class="card"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span>
+          <span class="t"><small>Телефон</small><a href="tel:+380930003743">+380 93 000 37 43</a></span><button class="copy" type="button" data-copy="+380930003743">Копіювати</button></div>
+        <div class="card"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+          <span class="t"><small>Email</small><a href="mailto:naidadesign.int@gmail.com">naidadesign.int@gmail.com</a></span><button class="copy" type="button" data-copy="naidadesign.int@gmail.com">Копіювати</button></div>
+        <!-- TELEGRAM: замініть посилання на свій нік, напр. https://t.me/naidabureau -->
+        <div class="card"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3 11l6 2.5L11 20l3.5-4.5L19 19z"/><path d="m9 13.5 7-5"/></svg></span>
+          <span class="t"><small>Telegram</small><a href="https://t.me/+380930003743" target="_blank" rel="noopener">Написати в Telegram ↗</a></span></div>
+      </div>
+      <form class="quick" id="quick">
+        <label for="msg">Або коротко опишіть задачу</label>
+        <textarea id="msg" placeholder="Наприклад: потрібен застосунок для запису клієнтів, є дизайн / немає дизайну, бажаний термін…"></textarea>
+        <button type="submit">Надіслати листом →</button>
+      </form>
+      <p class="note">Відповідаю протягом дня. Кнопка відкриває вашу пошту з уже готовим листом.</p>
+    </div>
+  </section>
+  <footer><span>© NaidaBureau · Design &amp; fullstack code</span><a href="index.html">← на головну</a></footer>
+</main>
+
+<script>
+const hd = document.querySelector('header'), bg = document.getElementById('burger');
+const setMenu = (o) => { hd.classList.toggle('open', o); bg.setAttribute('aria-expanded', o); bg.textContent = o ? 'Закрити' : 'Меню'; document.body.style.overflow = o ? 'hidden' : ''; };
+bg.onclick = () => setMenu(!hd.classList.contains('open'));
+addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+// копіювання
+document.querySelectorAll('[data-copy]').forEach((b) => b.onclick = async () => {
+  try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = 'Скопійовано ✓'; } catch { b.textContent = b.dataset.copy; }
+  setTimeout(() => b.textContent = 'Копіювати', 1800);
+});
+// лист з готовим текстом
+document.getElementById('quick').onsubmit = (e) => { e.preventDefault();
+  const t = document.getElementById('msg').value.trim();
+  location.href = 'mailto:naidadesign.int@gmail.com?subject=' + encodeURIComponent('Проєкт для NaidaBureau') + '&body=' + encodeURIComponent(t || 'Вітаю! Хочу обговорити проєкт.');
+};
+// фон: знак <N/> з частинок, що повільно дихає і тікає від курсора
+(() => {
+  const cv = document.getElementById('bgN'), g = cv.getContext('2d'), reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W, H, P = [], m = { x: -999, y: -999 };
+  function build() {
+    const D = Math.min(2, devicePixelRatio || 1); W = innerWidth; H = innerHeight; cv.width = W * D; cv.height = H * D; g.setTransform(D, 0, 0, D, 0, 0);
+    const c = document.createElement('canvas'), x = c.getContext('2d'); c.width = 900; c.height = 360; x.textBaseline = 'middle'; x.textAlign = 'center';
+    x.font = '300 260px "JetBrains Mono", monospace'; x.fillStyle = '#0f0'; x.fillText('<', 140, 180); x.fillText('/>', 700, 180);
+    x.font = '280px "Dela Gothic One", sans-serif'; x.fillStyle = '#f00'; x.fillText('N', 430, 190);
+    const d = x.getImageData(0, 0, 900, 360).data, small = W < 900, s = Math.min(W * (small ? .9 : .34), 620) / 900, ox = small ? W * .05 : W * .07, oy = small ? H * .62 : H - 360 * s - 30; P = [];
+    for (let yy = 0; yy < 360; yy += 6) for (let xx = 0; xx < 900; xx += 6) { const i = (yy * 900 + xx) * 4; if (d[i + 3] > 128) P.push({ hx: ox + xx * s, hy: oy + yy * s, x: Math.random() * W, y: Math.random() * H, vx: 0, vy: 0, l: d[i + 1] > d[i], ph: Math.random() * 6.28 }); }
+  }
+  function frame(t) {
+    g.clearRect(0, 0, W, H);
+    for (const p of P) {
+      const bx = p.hx + (reduce ? 0 : Math.sin(t / 1400 + p.ph) * 3), by = p.hy + (reduce ? 0 : Math.cos(t / 1700 + p.ph) * 3);
+      const dx = p.x - m.x, dy = p.y - m.y, d2 = dx * dx + dy * dy;
+      if (d2 < 9000) { const d = Math.sqrt(d2) || 1; p.vx += dx / d * 1.6; p.vy += dy / d * 1.6; }
+      p.vx += (bx - p.x) * .02; p.vy += (by - p.y) * .02; p.vx *= .86; p.vy *= .86; p.x += p.vx; p.y += p.vy;
+      g.fillStyle = p.l ? 'rgba(215,255,61,.55)' : 'rgba(244,242,236,.22)'; g.fillRect(p.x, p.y, 1.8, 1.8);
+    }
+    requestAnimationFrame(frame);
+  }
+  addEventListener('pointermove', (e) => { m.x = e.clientX; m.y = e.clientY; });
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(build, 200); });
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { build(); requestAnimationFrame(frame); });
+})();
+</script>
+</body>
+</html>

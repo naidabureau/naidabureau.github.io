@@ -24,13 +24,32 @@ body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--f-body)
 :focus-visible{outline:2px solid var(--lime);outline-offset:3px}
 #gl{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0;cursor:crosshair}
 .vignette{position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(ellipse at center,transparent 50%,#000a 100%)}
-header{position:fixed;left:0;right:0;top:0;z-index:5;display:flex;align-items:center;gap:20px;justify-content:space-between;
+header{position:fixed;left:0;right:0;top:0;z-index:6;display:flex;align-items:center;gap:20px;justify-content:space-between;
   padding:18px max(20px,env(safe-area-inset-right)) 18px max(20px,env(safe-area-inset-left));pointer-events:none}
 header > *{pointer-events:auto}
 .logo{display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-size:16px;color:var(--paper);text-decoration:none}
 .logo .m{display:flex;align-items:center;font-size:22px;line-height:1}
 .logo i{font-family:var(--f-mono);font-weight:300;font-style:normal;color:var(--lime)}
-.dots{display:flex;gap:10px;align-items:center}
+.dots{position:fixed;right:max(18px,env(safe-area-inset-right));top:50%;transform:translateY(-50%);z-index:5;display:flex;flex-direction:column;gap:12px;align-items:center}
+/* верхнє меню */
+.nav{display:flex;gap:2px;align-items:center;font-family:var(--f-mono);font-size:12px;padding:4px;border-radius:999px;background:#0b0b0dcc;border:1px solid #ffffff1a;backdrop-filter:blur(12px)}
+.nav a{color:#CFCDD4;padding:9px 13px;border-radius:999px;text-decoration:none;transition:color .2s,background .2s;white-space:nowrap}
+.nav a:hover,.nav a:focus-visible{color:var(--paper);background:#ffffff14}
+.nav a.cta{background:var(--lime);color:#0B0B0D;margin-left:6px}
+.nav a.cta:hover{background:var(--paper)}
+.nav .sep{width:1px;height:16px;background:#ffffff26;margin:0 6px}
+.burger{display:none;position:relative;z-index:2;font-family:var(--f-mono);font-size:12px;color:var(--paper);background:#ffffff12;border:1px solid #ffffff26;border-radius:999px;padding:9px 14px;cursor:pointer;backdrop-filter:blur(8px)}
+.logo{position:relative;z-index:2}
+@media (max-width:920px){
+  .burger{display:block}
+  .nav{position:fixed;inset:0;z-index:1;border:0;border-radius:0;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;padding:90px 28px 40px;background:#070708f5;backdrop-filter:blur(10px);
+    opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+  .nav a{font-family:var(--f-display);font-size:clamp(30px,8vw,46px);color:var(--paper);padding:6px 0;background:none!important;line-height:1.1}
+  .nav a:hover{color:var(--lime)}
+  .nav a.cta{background:none;color:var(--lime);margin:14px 0 0}
+  .nav .sep{display:none}
+  header.open .nav{opacity:1;visibility:visible}
+}
 .dots a{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--muted);display:block;transition:all .3s}
 .dots a.on{background:var(--lime);border-color:var(--lime);transform:scale(1.3)}
 .back{font-family:var(--f-mono);font-size:12px;color:var(--muted);text-decoration:none}
@@ -42,10 +61,10 @@ header > *{pointer-events:auto}
 .cap .k{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;color:var(--lime);text-transform:uppercase}
 .cap h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(28px,3.4vw,44px);line-height:1.05;text-wrap:balance}
 .cap p{margin:0;color:#CFCDD4;font-size:16px;line-height:1.6}
-.scene.right{justify-content:flex-end}
+.scene.right{justify-content:flex-end;padding-right:max(64px,env(safe-area-inset-right))}
 .hint{white-space:nowrap;position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:5;font-family:var(--f-mono);font-size:12px;color:var(--muted);display:flex;gap:18px;pointer-events:none;transition:opacity .4s}
 .hint span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--lime);margin-right:8px;vertical-align:1px}
-.shots{position:absolute;right:max(24px,env(safe-area-inset-right));top:50%;transform:translateY(-50%);display:flex;gap:16px;pointer-events:auto}
+.shots{position:absolute;right:max(64px,env(safe-area-inset-right));top:50%;transform:translateY(-50%);display:flex;gap:16px;pointer-events:auto}
 .shot{width:150px;border-radius:22px;overflow:hidden;border:5px solid #26262c;box-shadow:0 30px 60px #000c;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
 .shot img{display:block;width:100%}
 .shot:nth-child(1){transform:rotate(-6deg) translateY(20px)} .shot:nth-child(2){transform:rotate(5deg) translateY(-20px)}
@@ -55,6 +74,7 @@ header > *{pointer-events:auto}
 .final .row{display:flex;flex-wrap:wrap;gap:12px}
 .btn{display:inline-flex;align-items:center;gap:10px;padding:17px 26px;border-radius:16px;background:var(--lime);color:#0B0B0D;font-weight:700;text-decoration:none;font-size:16px}
 .btn.g{background:#ffffff10;color:var(--paper);border:1px solid #ffffff22;backdrop-filter:blur(8px)}
+.btn.sm{padding:13px 20px;font-size:15px;border-radius:14px;margin-top:6px}
 .mail{font-family:var(--f-mono);color:var(--muted);font-size:13px;text-decoration:none}
 a.mail:hover{color:var(--paper)}
 .versions{background:linear-gradient(90deg,#070708ee 0%,#070708b3 55%,#07070840 100%);min-height:100vh;display:flex;flex-direction:column;justify-content:center;gap:26px;padding:120px max(24px,env(safe-area-inset-right)) 80px max(24px,env(safe-area-inset-left));pointer-events:auto}
@@ -95,34 +115,40 @@ a.mail:hover{color:var(--paper)}
 
 <header>
   <a class="logo" href="#s0"><span class="m"><i>&lt;</i>N<i>/&gt;</i></span> NAIDA BUREAU</a>
-  <nav class="dots" aria-label="Сцени">
-    <a href="#s0" aria-label="Сцена 1"></a><a href="#s1" aria-label="Сцена 2"></a><a href="#s2" aria-label="Сцена 3"></a><a href="#s3" aria-label="Сцена 4"></a><a href="#versions" aria-label="Сцена 5: інші версії"></a>
+  <nav class="nav" id="nav" aria-label="Головне меню">
+    <a href="projects.html">Проєкти</a><span class="sep" aria-hidden="true"></span>
+    <a href="os.html">NaidaOS</a><a href="editor.html">Живий редактор</a><a href="game.html">Naida Quest</a>
+    <a class="cta" href="contacts.html">Контакти</a>
   </nav>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="nav">Меню</button>
 </header>
+<nav class="dots" aria-label="Сцени">
+  <a href="#s0" aria-label="Сцена 1"></a><a href="#s1" aria-label="Сцена 2"></a><a href="#s2" aria-label="Сцена 3"></a><a href="#s3" aria-label="Сцена 4"></a><a href="#versions" aria-label="Сцена 5: інші версії"></a>
+</nav>
 
 <main class="story">
   <section class="scene" id="s0">
     <div class="cap"><span class="k">Сцена 1 · Знак</span><h2>&lt;N/&gt; — мій підпис у коді</h2><p>Наталія Найда. Дизайнерка і фулстак-розробниця. Поведіть мишкою чи пальцем — частинки реагують. Натисніть — і знак розлетиться та збереться знову.</p></div>
   </section>
   <section class="scene right" id="s1">
-    <div class="cap"><span class="k">Сцена 2 · Дизайн</span><h2>Дизайн роблю сама</h2><p>Від першого ескізу до останнього пікселя: структура, кольори, шрифти, анімації. Це моя зона, тут я не делегую.</p></div>
+    <div class="cap"><span class="k">Сцена 2 · Дизайн</span><h2>Власний дизайн</h2><p>Від першого ескізу до останнього пікселя: структура, кольори, шрифти, анімації. Дану частину проекту я не делегую.</p></div>
   </section>
   <section class="scene" id="s2">
-    <div class="cap"><span class="k">Сцена 3 · Код</span><h2>Код — разом з AI</h2><p>AI пише рутину швидше за мене. Архітектуру, логіку і кожну зміну перед запуском перевіряю я.</p></div>
+    <div class="cap"><span class="k">Сцена 3 · Код</span><h2>Магія коду</h2><p>AI допомагає в рутині, це в кілька разів прискорює роботу. Архітектуру, логіку і кожну зміну перед запуском перевіряю я.</p></div>
   </section>
   <section class="scene phone" id="s3">
     <div class="shots" aria-label="Роботи">
-      <a class="shot" href="https://vidvazhni-pro-app.onrender.com" target="_blank" rel="noopener"><img src="works/vidvazhni-home-dark.jpg" alt="Відважні.PRO — платформа для ветеранського бізнесу"></a>
+      <a class="shot" href="https://vidvazhni-pro-app.onrender.com" target="_blank" rel="noopener"><img src="works/vidvazhni-home-dark.jpg" alt="Відважні — платформа для ветеранського бізнесу"></a>
       <a class="shot" href="https://pureheartskalush.com" target="_blank" rel="noopener"><img src="works/pureheart-mobile.jpg" alt="Чисті серця Калуш — мобільна версія сайту"></a>
     </div>
-    <div class="cap"><span class="k">Сцена 4 · Продукт</span><h2>Застосунки й сайти, які працюють</h2><p>Відважні.PRO — платформа для ветеранського бізнесу: мобільний застосунок і веб-версія. Уже працює й далі розвивається. Чисті серця Калуш — сайт, вишитий хрестиком. Натисніть на екран, щоб відкрити.</p></div>
+    <div class="cap"><span class="k">Сцена 4 · Продукт</span><h2>Full stack development</h2><p>Розробка застосунків, сайтів, програм, створення чат-ботів та автоматизація процесів з нуля до запуску: від ідеї та дизайну до реалізації та підтримки.</p><div><a class="btn sm" href="projects.html">Всі проєкти →</a></div></div>
   </section>
   <section class="versions" id="versions" aria-labelledby="vh">
     <span class="k">Сцена 5 · Ваша черга</span>
     <h2 id="vh">Відчуйте себе розробником і дизайнером</h2>
     <p>Оберіть, як познайомитися зі мною ближче: попрацюйте в моїй власній операційній системі, змініть дизайн у живому редакторі або пройдіть гру про один день із життя дизайнерки й розробниці.</p>
     <div class="vgrid">
-      <a class="v" href="os.html"><span class="n">01 · Операційна система</span><b>NaidaOS</b><span>Нові емоції від моєї власної ОС: вікна, які можна тягати, термінал з командами і проєкти, що відкриваються як програми.</span><em>Запустити NaidaOS →</em></a>
+      <a class="v" href="os.html"><span class="n">01 · Операційна система</span><b>NaidaOS</b><span>Нові емоції від моєї власної ОС: вікна, які можна пересувати як звичайні програми на компʼютері, термінал з командами і проєкти, що відкриваються як програми.</span><em>Запустити NaidaOS →</em></a>
       <a class="v" href="editor.html"><span class="n">02 · Редактор</span><b>Живий редактор</b><span>Змініть дизайн сторінки самі: тягніть елементи, міняйте кольори й дивіться, як наживо оновлюється код.</span><em>Відкрити редактор →</em></a>
       <a class="v" href="game.html"><span class="n">03 · Гра</span><b>Naida Quest</b><span>Невеличка гра: день із життя дизайнерки й розробниці. Ідея, дизайн, код, запуск. Наприкінці на вас чекає приз.</span><em>Зіграти →</em></a>
     </div>
@@ -169,22 +195,31 @@ function sampleText(parts, maxW, maxH) {
   const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
   return pts.map(([x, y, l]) => ({ x: (x - cx) * s, y: (y - cy) * s, z: (Math.random() - .5) * 26, l }));
 }
-function phoneShape(h) {
-  const w = h * 0.48, r = w * 0.18, pts = [];
-  const rr = (n) => { for (let i = 0; i < n; i++) { const t = Math.random() * (2 * (w + h)); let x, y;
-      if (t < w) { x = -w / 2 + t; y = -h / 2; } else if (t < w + h) { x = w / 2; y = -h / 2 + (t - w); } else if (t < 2 * w + h) { x = w / 2 - (t - w - h); y = h / 2; } else { x = -w / 2; y = h / 2 - (t - 2 * w - h); }
-      // заокруглені кути
-      const ax = Math.abs(x) - (w / 2 - r), ay = Math.abs(y) - (h / 2 - r);
-      if (ax > 0 && ay > 0) { const a = Math.atan2(ay, ax); x = Math.sign(x) * (w / 2 - r + Math.cos(a) * r); y = Math.sign(y) * (h / 2 - r + Math.sin(a) * r); }
-      pts.push({ x, y, z: (Math.random() - .5) * 30, l: 0 }); } };
-  rr(900);
-  // екран: банер, плитки, рядки
-  const blk = (x0, y0, x1, y1, n, l) => { for (let i = 0; i < n; i++) pts.push({ x: x0 + Math.random() * (x1 - x0), y: y0 + Math.random() * (y1 - y0), z: (Math.random() - .5) * 6 + 8, l }); };
-  const L = -w / 2 + w * .1, R = w / 2 - w * .1;
-  blk(L, -h * .38, R, -h * .18, 420, 1);
-  blk(L, -h * .13, -w * .03, h * .02, 200, 0); blk(w * .03, -h * .13, R, h * .02, 200, 1);
-  for (let k = 0; k < 4; k++) blk(L, h * (.08 + k * .07), R - (k % 2) * w * .25, h * (.1 + k * .07), 90, 0);
-  blk(L, h * .38, R, h * .43, 160, 1);
+/* --- full stack: три шари, як у застосунку — інтерфейс, сервер, база даних ---
+   справжнє 3D: шари лежать горизонтально, нахилені в ізометрію, мишка їх обертає */
+function stackShape(S) {
+  const pts = [], A = S * .36, gap = S * .3, th = S * .04;
+  const ay = Math.PI / 4, ax = .5, cy1 = Math.cos(ay), sy1 = Math.sin(ay), cx1 = Math.cos(ax), sx1 = Math.sin(ax);
+  const put = (x, y, z, l) => { const X = x * cy1 - z * sy1, Z = x * sy1 + z * cy1; pts.push({ x: X, y: y * cx1 - Z * sx1, z: y * sx1 + Z * cx1, l }); };
+  const square = (y, n, l) => { for (let i = 0; i < n; i++) { const t = Math.random() * 4, e = Math.floor(t), u = (t - e) * 2 - 1;
+      const [x, z] = [[u * A, -A], [A, u * A], [-u * A, A], [-A, -u * A]][e]; put(x, y, z, l); } };
+  const fill = (y, n, l, x0 = -A, x1 = A, z0 = -A, z1 = A) => { for (let i = 0; i < n; i++) put(x0 + Math.random() * (x1 - x0), y, z0 + Math.random() * (z1 - z0), l); };
+  const pillar = (y, n, l) => { for (let i = 0; i < n; i++) { const k = (Math.random() * 4) | 0, [x, z] = [[A, A], [-A, A], [A, -A], [-A, -A]][k]; put(x, y + Math.random() * th, z, l); } };
+  // 1. інтерфейс (лайм): рамка вікна, шапка, блоки
+  const y0 = -gap;
+  square(y0, 520, 1); square(y0 + th, 260, 1); pillar(y0, 60, 1);
+  fill(y0, 140, 1, -A * .82, A * .82, -A * .82, -A * .6);
+  fill(y0, 180, 1, -A * .82, -A * .08, -A * .45, A * .1); fill(y0, 70, 0, A * .08, A * .82, -A * .45, -A * .3); fill(y0, 70, 0, A * .08, A * .6, -A * .2, -A * .05);
+  for (let k = 0; k < 3; k++) fill(y0, 60, 0, -A * .82, A * (.82 - k * .3), A * (.28 + k * .2), A * (.33 + k * .2));
+  // 2. сервер / API: рамка і рядки коду
+  square(0, 460, 0); square(th, 240, 0); pillar(0, 50, 0);
+  for (let k = 0; k < 6; k++) { const ind = [0, .15, .3, .15, .3, 0][k]; fill(0, 55, k === 2 || k === 4 ? 1 : 0, -A * (.8 - ind), A * (.5 - k % 3 * .2), -A * .75 + k * A * .3, -A * .7 + k * A * .3); }
+  // 3. база даних: таблиця — рядки й колонки
+  const yb = gap;
+  square(yb, 460, 0); square(yb + th, 240, 0); pillar(yb, 50, 0);
+  for (let r = 0; r < 5; r++) for (let c = 0; c < 4; c++) fill(yb, 18, r === 0 ? 1 : 0, -A * .8 + c * A * .42, -A * .8 + c * A * .42 + A * .34, -A * .8 + r * A * .34, -A * .8 + r * A * .34 + A * .14);
+  // вертикальні потоки даних між шарами
+  for (let i = 0; i < 260; i++) { const y = -gap + Math.random() * gap * 2, k = i % 3; put([-A * .5, 0, A * .5][k], y, [A * .5, 0, -A * .5][k] * 0 + A * .9, 1); }
   return pts;
 }
 function build() {
@@ -194,7 +229,7 @@ function build() {
     sampleText([{ t: '<', font: mono, lime: 1 }, { t: 'N', font: dela }, { t: '/>', font: mono, lime: 1 }], mw * .7, mh * 1.1),
     sampleText([{ t: 'DESIGN', font: dela }], mw, mh * .55),
     sampleText([{ t: '{', font: mono, lime: 1, gap: .05 }, { t: 'CODE', font: dela, lime: 1, gap: .05 }, { t: '}', font: mono, lime: 1 }], mw, mh * .6),
-    phoneShape(Math.min(vh * (small ? .4 : .62), 560)),
+    stackShape(Math.min(small ? vw * .78 : vh * .62, 560)),
     sampleText([{ t: 'NAIDA', font: dela }, { br: 1 }, { t: 'BUREAU', font: dela }, { t: '.', font: dela, lime: 1 }], mw * .8, mh * 1.05),
   ];
   // кожна форма -> рівно N точок
@@ -273,6 +308,11 @@ setTimeout(start, 1500);
 if (window.ResizeObserver) new ResizeObserver(() => { if (started) { size(); onScroll(); } }).observe(cv);
 if (matchMedia('(pointer: coarse)').matches) { document.getElementById('hint2').textContent = 'дотик — вибух'; }
 document.getElementById('copy').onclick = async (e) => { const t = document.getElementById('mailtxt').textContent; try { await navigator.clipboard.writeText(t); e.target.textContent = 'Скопійовано ✓'; } catch { const r = document.createRange(); r.selectNodeContents(document.getElementById('mailtxt')); getSelection().removeAllRanges(); getSelection().addRange(r); e.target.textContent = 'Email виділено'; } };
+const hd = document.querySelector('header'), bg = document.getElementById('burger');
+const setMenu = (o) => { hd.classList.toggle('open', o); bg.setAttribute('aria-expanded', o); bg.textContent = o ? 'Закрити' : 'Меню'; document.body.style.overflow = o ? 'hidden' : ''; };
+bg.onclick = () => setMenu(!hd.classList.contains('open'));
+document.querySelectorAll('#nav a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
 let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(size, 200); });
 })();
 </script>
