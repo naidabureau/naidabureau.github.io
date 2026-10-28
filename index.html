@@ -2,20 +2,320 @@
 <html lang="uk">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="description" content="NaidaBureau — Наталія Найда, дизайнерка і фулстак-розробниця: застосунки, сайти, віджети.">
+<meta property="og:title" content="NaidaBureau">
+<meta property="og:description" content="Design &amp; fullstack code: застосунки, сайти, віджети.">
 <title>NaidaBureau</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@300&display=swap">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@300;400;500;700&family=Manrope:wght@400;500;700&display=swap">
 <style>
-html,body{height:100%;margin:0}
-body{background:#0B0B0D;color:#F4F2EC;display:grid;place-items:center;font-family:'JetBrains Mono',monospace}
-.w{display:flex;flex-direction:column;align-items:center;gap:28px;text-align:center}
-.m{display:flex;align-items:center;font-size:72px;line-height:1}
-.m i{font-style:normal;font-weight:300;color:#D7FF3D}.m b{font-family:'Dela Gothic One',sans-serif;font-weight:400}
-p{margin:0;font-weight:300;letter-spacing:.35em;color:#A3A1AA}
+/* Кіно: фіксоване полотно з частинками, поверх — п'ять розділів-сцен, що прокручуються */
+:root{
+  --ink:#070708; --paper:#F4F2EC; --muted:#A3A1AA; --lime:#D7FF3D; --line:#2A2A30;
+  --f-display:'Dela Gothic One','Arial Black',sans-serif; --f-body:'Manrope',system-ui,sans-serif; --f-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--f-body)}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0;cursor:crosshair}
+.vignette{position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(ellipse at center,transparent 50%,#000a 100%)}
+header{position:fixed;left:0;right:0;top:0;z-index:6;display:flex;align-items:center;gap:20px;justify-content:space-between;
+  padding:18px max(20px,env(safe-area-inset-right)) 18px max(20px,env(safe-area-inset-left));pointer-events:none}
+header > *{pointer-events:auto}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-size:16px;color:var(--paper);text-decoration:none}
+.logo .m{display:flex;align-items:center;font-size:22px;line-height:1}
+.logo i{font-family:var(--f-mono);font-weight:300;font-style:normal;color:var(--lime)}
+.dots{position:fixed;right:max(18px,env(safe-area-inset-right));top:50%;transform:translateY(-50%);z-index:5;display:flex;flex-direction:column;gap:12px;align-items:center}
+/* верхнє меню */
+.nav{display:flex;gap:2px;align-items:center;font-family:var(--f-mono);font-size:12px;padding:4px;border-radius:999px;background:#0b0b0dcc;border:1px solid #ffffff1a;backdrop-filter:blur(12px)}
+.nav a{color:#CFCDD4;padding:9px 13px;border-radius:999px;text-decoration:none;transition:color .2s,background .2s;white-space:nowrap}
+.nav a:hover,.nav a:focus-visible{color:var(--paper);background:#ffffff14}
+.nav a.cta{background:var(--lime);color:#0B0B0D;margin-left:6px}
+.nav a.cta:hover{background:var(--paper)}
+.nav .sep{width:1px;height:16px;background:#ffffff26;margin:0 6px}
+.burger{display:none;position:relative;z-index:2;font-family:var(--f-mono);font-size:12px;color:var(--paper);background:#ffffff12;border:1px solid #ffffff26;border-radius:999px;padding:9px 14px;cursor:pointer;backdrop-filter:blur(8px)}
+.logo{position:relative;z-index:2}
+@media (max-width:920px){
+  .burger{display:block}
+  .nav{position:fixed;inset:0;z-index:1;border:0;border-radius:0;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;padding:90px 28px 40px;background:#070708f5;backdrop-filter:blur(10px);
+    opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+  .nav a{font-family:var(--f-display);font-size:clamp(30px,8vw,46px);color:var(--paper);padding:6px 0;background:none!important;line-height:1.1}
+  .nav a:hover{color:var(--lime)}
+  .nav a.cta{background:none;color:var(--lime);margin:14px 0 0}
+  .nav .sep{display:none}
+  header.open .nav{opacity:1;visibility:visible}
+}
+.dots a{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--muted);display:block;transition:all .3s}
+.dots a.on{background:var(--lime);border-color:var(--lime);transform:scale(1.3)}
+.back{font-family:var(--f-mono);font-size:12px;color:var(--muted);text-decoration:none}
+.back:hover{color:var(--paper)}
+
+.story{position:relative;z-index:2;pointer-events:none}
+.scene{min-height:100vh;display:flex;align-items:flex-end;padding:0 max(24px,env(safe-area-inset-right)) 12vh max(24px,env(safe-area-inset-left))}
+.cap{max-width:440px;display:flex;flex-direction:column;gap:12px;pointer-events:auto}
+.cap .k{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;color:var(--lime);text-transform:uppercase}
+.cap h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(28px,3.4vw,44px);line-height:1.05;text-wrap:balance}
+.cap p{margin:0;color:#CFCDD4;font-size:16px;line-height:1.6}
+.scene.right{justify-content:flex-end;padding-right:max(64px,env(safe-area-inset-right))}
+.hint{white-space:nowrap;position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:5;font-family:var(--f-mono);font-size:12px;color:var(--muted);display:flex;gap:18px;pointer-events:none;transition:opacity .4s}
+.hint span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--lime);margin-right:8px;vertical-align:1px}
+.shots{position:absolute;right:max(64px,env(safe-area-inset-right));top:50%;transform:translateY(-50%);display:flex;gap:16px;pointer-events:auto}
+.shot{width:150px;border-radius:22px;overflow:hidden;border:5px solid #26262c;box-shadow:0 30px 60px #000c;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.shot img{display:block;width:100%}
+.shot:nth-child(1){transform:rotate(-6deg) translateY(20px)} .shot:nth-child(2){transform:rotate(5deg) translateY(-20px)}
+.shot:hover{transform:rotate(0) scale(1.06)}
+.scene.phone{position:relative}
+.final{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;gap:22px;padding:0 max(24px,env(safe-area-inset-right)) 10vh max(24px,env(safe-area-inset-left));pointer-events:auto}
+.final .row{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:17px 26px;border-radius:16px;background:var(--lime);color:#0B0B0D;font-weight:700;text-decoration:none;font-size:16px}
+.btn.g{background:#ffffff10;color:var(--paper);border:1px solid #ffffff22;backdrop-filter:blur(8px)}
+.btn.sm{padding:13px 20px;font-size:15px;border-radius:14px;margin-top:6px}
+.mail{font-family:var(--f-mono);color:var(--muted);font-size:13px;text-decoration:none}
+a.mail:hover{color:var(--paper)}
+.versions{background:linear-gradient(90deg,#070708ee 0%,#070708b3 55%,#07070840 100%);min-height:100vh;display:flex;flex-direction:column;justify-content:center;gap:26px;padding:120px max(24px,env(safe-area-inset-right)) 80px max(24px,env(safe-area-inset-left));pointer-events:auto}
+.versions .k{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;color:var(--lime);text-transform:uppercase}
+.versions h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(30px,4.4vw,60px);line-height:1.02;max-width:16ch;text-wrap:balance}
+.versions p{margin:0;max-width:56ch;color:#CFCDD4;font-size:16px;line-height:1.6}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px;max-width:1180px}
+.v{display:flex;flex-direction:column;gap:12px;padding:24px;border-radius:22px;background:#0b0b0dcc;border:1px solid #ffffff1f;backdrop-filter:blur(14px);color:var(--paper);text-decoration:none;transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .25s}
+.v:hover,.v:focus-visible{transform:translateY(-6px);border-color:var(--lime);outline:none}
+.v .n{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.v b{font-family:var(--f-display);font-weight:400;font-size:26px;line-height:1.05}
+.v span{color:#CFCDD4;font-size:14px;line-height:1.55}
+.v em{margin-top:auto;font-style:normal;font-family:var(--f-mono);font-size:13px;color:var(--lime)}
+.vbtn{font-family:var(--f-mono);font-size:12px;color:#0B0B0D;background:var(--lime);padding:8px 12px;border-radius:999px;text-decoration:none;white-space:nowrap}
+.vbtn:hover{background:var(--paper)}
+@media (max-width:760px){
+  .shots{position:static;transform:none;margin:0 0 6px;gap:12px;order:-1}
+  .scene.phone{flex-direction:column;align-items:flex-start;justify-content:flex-end}
+  .scene.phone .cap{gap:10px}
+  .shot{width:92px;border-width:4px;border-radius:16px}
+  .shot:nth-child(1){transform:rotate(-4deg)} .shot:nth-child(2){transform:rotate(4deg) translateY(-8px)}
+  .scene{padding-bottom:9vh}
+  .cap h2{font-size:28px}
+  .cap p{font-size:15px}
+  .versions{background:linear-gradient(180deg,#070708cc,#070708f2 30%);padding-top:90px}
+  .vgrid{gap:10px}
+  header{background:linear-gradient(#070708 60%,#07070800)}
+  .v{padding:18px}
+  .v b{font-size:22px}
+  .dots{display:none}
+}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.shot{transition:none}}
 </style>
 </head>
-<body><div class="w"><div class="m"><i>&lt;</i><b>N</b><i>/&gt;</i></div><p>скоро.</p></div></body>
+<body>
+<canvas id="gl" aria-label="Частинки, що складаються у знак NaidaBureau" role="img"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+
+<header>
+  <a class="logo" href="#s0"><span class="m"><i>&lt;</i>N<i>/&gt;</i></span> NAIDA BUREAU</a>
+  <nav class="nav" id="nav" aria-label="Головне меню">
+    <a href="projects.html">Проєкти</a><span class="sep" aria-hidden="true"></span>
+    <a href="os.html">NaidaOS</a><a href="editor.html">Живий редактор</a><a href="game.html">Naida Quest</a>
+    <a class="cta" href="contacts.html">Контакти</a>
+  </nav>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="nav">Меню</button>
+</header>
+<nav class="dots" aria-label="Сцени">
+  <a href="#s0" aria-label="Сцена 1"></a><a href="#s1" aria-label="Сцена 2"></a><a href="#s2" aria-label="Сцена 3"></a><a href="#s3" aria-label="Сцена 4"></a><a href="#versions" aria-label="Сцена 5: інші версії"></a>
+</nav>
+
+<main class="story">
+  <section class="scene" id="s0">
+    <div class="cap"><span class="k">Сцена 1 · Знак</span><h2>&lt;N/&gt; — мій підпис у коді</h2><p>Наталія Найда. Дизайнерка і фулстак-розробниця. Поведіть мишкою чи пальцем — частинки реагують. Натисніть — і знак розлетиться та збереться знову.</p></div>
+  </section>
+  <section class="scene right" id="s1">
+    <div class="cap"><span class="k">Сцена 2 · Дизайн</span><h2>Власний дизайн</h2><p>Від першого ескізу до останнього пікселя: структура, кольори, шрифти, анімації. Дану частину проекту я не делегую.</p></div>
+  </section>
+  <section class="scene" id="s2">
+    <div class="cap"><span class="k">Сцена 3 · Код</span><h2>Магія коду</h2><p>AI допомагає в рутині, це в кілька разів прискорює роботу. Архітектуру, логіку і кожну зміну перед запуском перевіряю я.</p></div>
+  </section>
+  <section class="scene phone" id="s3">
+    <div class="shots" aria-label="Роботи">
+      <a class="shot" href="https://vidvazhni-pro-app.onrender.com" target="_blank" rel="noopener"><img src="works/vidvazhni-home-dark.jpg" alt="Відважні — платформа для ветеранського бізнесу"></a>
+      <a class="shot" href="https://pureheartskalush.com" target="_blank" rel="noopener"><img src="works/pureheart-mobile.jpg" alt="Чисті серця Калуш — мобільна версія сайту"></a>
+    </div>
+    <div class="cap"><span class="k">Сцена 4 · Продукт</span><h2>Full stack development</h2><p>Розробка застосунків, сайтів, програм, створення чат-ботів та автоматизація процесів з нуля до запуску: від ідеї та дизайну до реалізації та підтримки.</p><div><a class="btn sm" href="projects.html">Всі проєкти →</a></div></div>
+  </section>
+  <section class="versions" id="versions" aria-labelledby="vh">
+    <span class="k">Сцена 5 · Ваша черга</span>
+    <h2 id="vh">Відчуйте себе розробником і дизайнером</h2>
+    <p>Оберіть, як познайомитися зі мною ближче: попрацюйте в моїй власній операційній системі, змініть дизайн у живому редакторі або пройдіть гру про один день із життя дизайнерки й розробниці.</p>
+    <div class="vgrid">
+      <a class="v" href="os.html"><span class="n">01 · Операційна система</span><b>NaidaOS</b><span>Нові емоції від моєї власної ОС: вікна, які можна пересувати як звичайні програми на компʼютері, термінал з командами і проєкти, що відкриваються як програми.</span><em>Запустити NaidaOS →</em></a>
+      <a class="v" href="editor.html"><span class="n">02 · Редактор</span><b>Живий редактор</b><span>Змініть дизайн сторінки самі: тягніть елементи, міняйте кольори й дивіться, як наживо оновлюється код.</span><em>Відкрити редактор →</em></a>
+      <a class="v" href="game.html"><span class="n">03 · Гра</span><b>Naida Quest</b><span>Невеличка гра: день із життя дизайнерки й розробниці. Ідея, дизайн, код, запуск. Наприкінці на вас чекає приз.</span><em>Зіграти →</em></a>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:8px">
+      <button class="btn" type="button" id="copy" style="border:0;cursor:pointer;font:inherit;font-weight:700">Скопіювати email →</button>
+      <a class="mail" id="mailtxt" href="mailto:naidadesign.int@gmail.com">naidadesign.int@gmail.com</a>
+      <a class="mail" href="tel:+380930003743">+380 93 000 37 43</a>
+      <a class="mail" href="https://t.me/NaidaBureau" target="_blank" rel="noopener">Telegram @NaidaBureau</a>
+      <a href="concepts.html" style="font-family:var(--f-mono);font-size:13px;color:var(--muted);margin-left:auto">Усі концепції →</a>
+    </div>
+  </section>
+</main>
+<div class="hint" id="hint"><span>прокручуйте</span><span id="hint2">клік — вибух</span></div>
+
+<script>
+(() => {
+const cv = document.getElementById('gl'), ctx = cv.getContext('2d');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const DPR = Math.min(2, devicePixelRatio || 1);
+let W = 0, H = 0, N = innerWidth < 760 ? 1300 : 2600;
+const LIME = [215, 255, 61], PAPER = [244, 242, 236];
+let shapes = [], P = [];
+const mouse = { x: -9999, y: -9999, nx: 0, ny: 0 };
+
+/* --- вибірка точок з тексту: кожна частина має свій колір --- */
+function sampleText(parts, maxW, maxH) {
+  const c = document.createElement('canvas'), g = c.getContext('2d');
+  const base = 200; c.width = 2400; c.height = 900;
+  g.textBaseline = 'middle';
+  // ширина
+  let lines = [[]]; parts.forEach((p) => { if (p.br) lines.push([]); else lines[lines.length - 1].push(p); });
+  const lh = base * 1.0, widths = lines.map((ln) => ln.reduce((s, p) => { g.font = p.font.replace('S', base); return s + g.measureText(p.t).width + (p.gap || 0) * base; }, 0));
+  const totalH = lh * lines.length;
+  lines.forEach((ln, li) => {
+    let x = c.width / 2 - widths[li] / 2; const y = c.height / 2 - totalH / 2 + lh * (li + 0.5);
+    ln.forEach((p) => { g.font = p.font.replace('S', base); g.fillStyle = p.lime ? '#00ff00' : '#ff0000'; g.fillText(p.t, x, y); x += g.measureText(p.t).width + (p.gap || 0) * base; });
+  });
+  const d = g.getImageData(0, 0, c.width, c.height).data, pts = [];
+  const step = 4;
+  let minX = 1e9, maxX = -1e9, minY = 1e9, maxY = -1e9;
+  for (let y = 0; y < c.height; y += step) for (let x = 0; x < c.width; x += step) {
+    const i = (y * c.width + x) * 4; if (d[i + 3] > 128) { pts.push([x, y, d[i + 1] > d[i] ? 1 : 0]); if (x < minX) minX = x; if (x > maxX) maxX = x; if (y < minY) minY = y; if (y > maxY) maxY = y; }
+  }
+  const sw = maxX - minX, sh = maxY - minY, s = Math.min(maxW / sw, maxH / sh);
+  const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
+  return pts.map(([x, y, l]) => ({ x: (x - cx) * s, y: (y - cy) * s, z: (Math.random() - .5) * 26, l }));
+}
+/* --- full stack: три шари, як у застосунку — інтерфейс, сервер, база даних ---
+   справжнє 3D: шари лежать горизонтально, нахилені в ізометрію, мишка їх обертає */
+function stackShape(S) {
+  const pts = [], A = S * .36, gap = S * .3, th = S * .04;
+  const ay = Math.PI / 4, ax = .5, cy1 = Math.cos(ay), sy1 = Math.sin(ay), cx1 = Math.cos(ax), sx1 = Math.sin(ax);
+  const put = (x, y, z, l) => { const X = x * cy1 - z * sy1, Z = x * sy1 + z * cy1; pts.push({ x: X, y: y * cx1 - Z * sx1, z: y * sx1 + Z * cx1, l }); };
+  const square = (y, n, l) => { for (let i = 0; i < n; i++) { const t = Math.random() * 4, e = Math.floor(t), u = (t - e) * 2 - 1;
+      const [x, z] = [[u * A, -A], [A, u * A], [-u * A, A], [-A, -u * A]][e]; put(x, y, z, l); } };
+  const fill = (y, n, l, x0 = -A, x1 = A, z0 = -A, z1 = A) => { for (let i = 0; i < n; i++) put(x0 + Math.random() * (x1 - x0), y, z0 + Math.random() * (z1 - z0), l); };
+  const pillar = (y, n, l) => { for (let i = 0; i < n; i++) { const k = (Math.random() * 4) | 0, [x, z] = [[A, A], [-A, A], [A, -A], [-A, -A]][k]; put(x, y + Math.random() * th, z, l); } };
+  // 1. інтерфейс (лайм): рамка вікна, шапка, блоки
+  const y0 = -gap;
+  square(y0, 520, 1); square(y0 + th, 260, 1); pillar(y0, 60, 1);
+  fill(y0, 140, 1, -A * .82, A * .82, -A * .82, -A * .6);
+  fill(y0, 180, 1, -A * .82, -A * .08, -A * .45, A * .1); fill(y0, 70, 0, A * .08, A * .82, -A * .45, -A * .3); fill(y0, 70, 0, A * .08, A * .6, -A * .2, -A * .05);
+  for (let k = 0; k < 3; k++) fill(y0, 60, 0, -A * .82, A * (.82 - k * .3), A * (.28 + k * .2), A * (.33 + k * .2));
+  // 2. сервер / API: рамка і рядки коду
+  square(0, 460, 0); square(th, 240, 0); pillar(0, 50, 0);
+  for (let k = 0; k < 6; k++) { const ind = [0, .15, .3, .15, .3, 0][k]; fill(0, 55, k === 2 || k === 4 ? 1 : 0, -A * (.8 - ind), A * (.5 - k % 3 * .2), -A * .75 + k * A * .3, -A * .7 + k * A * .3); }
+  // 3. база даних: таблиця — рядки й колонки
+  const yb = gap;
+  square(yb, 460, 0); square(yb + th, 240, 0); pillar(yb, 50, 0);
+  for (let r = 0; r < 5; r++) for (let c = 0; c < 4; c++) fill(yb, 18, r === 0 ? 1 : 0, -A * .8 + c * A * .42, -A * .8 + c * A * .42 + A * .34, -A * .8 + r * A * .34, -A * .8 + r * A * .34 + A * .14);
+  // вертикальні потоки даних між шарами
+  for (let i = 0; i < 260; i++) { const y = -gap + Math.random() * gap * 2, k = i % 3; put([-A * .5, 0, A * .5][k], y, [A * .5, 0, -A * .5][k] * 0 + A * .9, 1); }
+  return pts;
+}
+function build() {
+  const small = W < 760, vw = W, vh = H, mw = Math.min(vw * (small ? .86 : .78), 1100), mh = vh * (small ? .3 : .42);
+  const mono = '300 Spx "JetBrains Mono", monospace', dela = 'Spx "Dela Gothic One", sans-serif';
+  shapes = [
+    sampleText([{ t: '<', font: mono, lime: 1 }, { t: 'N', font: dela }, { t: '/>', font: mono, lime: 1 }], mw * .7, mh * 1.1),
+    sampleText([{ t: 'DESIGN', font: dela }], mw, mh * .55),
+    sampleText([{ t: '{', font: mono, lime: 1, gap: .05 }, { t: 'CODE', font: dela, lime: 1, gap: .05 }, { t: '}', font: mono, lime: 1 }], mw, mh * .6),
+    stackShape(Math.min(small ? vw * .78 : vh * .62, 560)),
+    sampleText([{ t: 'NAIDA', font: dela }, { br: 1 }, { t: 'BUREAU', font: dela }, { t: '.', font: dela, lime: 1 }], mw * .8, mh * 1.05),
+  ];
+  // кожна форма -> рівно N точок
+  shapes = shapes.map((s) => { const out = []; for (let i = 0; i < N; i++) { const p = s[(Math.random() * s.length) | 0]; out.push({ x: p.x + (Math.random() - .5) * 2, y: p.y + (Math.random() - .5) * 2, z: p.z, l: p.l }); } return out; });
+  if (!P.length) for (let i = 0; i < N; i++) P.push({ x: (Math.random() - .5) * W * 2, y: (Math.random() - .5) * H * 2, z: (Math.random() - .5) * 800, ox: 0, oy: 0, vx: 0, vy: 0, d: Math.random(), tw: Math.random() * 6.28 });
+}
+function size() {
+  // у вбудованому вікні розмір спершу може бути нульовим — тоді чекаємо
+  const nw = cv.clientWidth || innerWidth, nh = cv.clientHeight || innerHeight;
+  if (nw < 50 || nh < 50) return false;
+  if (nw === W && nh === H && shapes.length) return true;
+  W = nw; H = nh; cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0); build(); return true;
+}
+
+/* --- прокрутка → номер сцени (дробовий) --- */
+const dots = [...document.querySelectorAll('.dots a')];
+let prog = 0;
+function onScroll() {
+  const secs = [...document.querySelectorAll('.story > section')];
+  const y = scrollY + H * .5; let p = 0;
+  secs.forEach((s, i) => { const top = s.offsetTop, h = s.offsetHeight; if (y >= top) p = i + Math.min(1, (y - top) / h) - .5; });
+  prog = Math.max(0, Math.min(shapes.length - 1, p));
+  const cur = Math.round(prog); dots.forEach((d, i) => d.classList.toggle('on', i === cur));
+  document.getElementById('hint').style.opacity = scrollY > 40 ? 0 : 1;
+}
+addEventListener('scroll', onScroll, { passive: true });
+addEventListener('pointermove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; mouse.nx = e.clientX / W - .5; mouse.ny = e.clientY / H - .5; });
+addEventListener('pointerleave', () => { mouse.x = mouse.y = -9999; });
+cv.addEventListener('click', (e) => { for (const p of P) { const a = Math.random() * 6.28, f = 8 + Math.random() * 22; p.vx += Math.cos(a) * f; p.vy += Math.sin(a) * f; } });
+
+/* --- кадр --- */
+const ease = (t) => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+let rx = 0, ry = 0, t0 = performance.now();
+function frame(now) {
+  if (!shapes.length || !W) { requestAnimationFrame(frame); return; }
+  const t = (now - t0) / 1000;
+  const dtf = Math.min(6, Math.max(.5, (now - (frame.last || now)) / 16.67 || 1)); frame.last = now;
+  const kk = 1 - Math.pow(1 - .08, dtf);   // збіжність не залежить від частоти кадрів
+  ctx.fillStyle = 'rgba(7,7,8,0.34)'; ctx.fillRect(0, 0, W, H);
+  const i0 = Math.floor(prog), i1 = Math.min(shapes.length - 1, i0 + 1), f = prog - i0;
+  const A = shapes[i0], B = shapes[i1];
+  const tRy = mouse.nx * .9 + (reduce ? 0 : Math.sin(t * .4) * .18), tRx = -mouse.ny * .5;
+  rx += (tRx - rx) * .06; ry += (tRy - ry) * .06;
+  const cyR = Math.cos(ry), syR = Math.sin(ry), cxR = Math.cos(rx), sxR = Math.sin(rx);
+  const fov = 900, cx = W / 2, cy = W < 760 ? H * .3 : H / 2 - H * .04;
+  for (let i = 0; i < N; i++) {
+    const p = P[i], a = A[i], b = B[i];
+    const lf = ease(Math.max(0, Math.min(1, (f - p.d * .35) / .65)));
+    const tx = a.x + (b.x - a.x) * lf, ty = a.y + (b.y - a.y) * lf, tz = a.z + (b.z - a.z) * lf;
+    p.x += (tx - p.x) * kk; p.y += (ty - p.y) * kk; p.z += (tz - p.z) * kk;
+    // обертання
+    let x = p.x * cyR - p.z * syR, z = p.x * syR + p.z * cyR, y = p.y * cxR - z * sxR; z = p.y * sxR + z * cxR;
+    const s = fov / (fov + z); let sx = cx + x * s + p.ox, sy = cy + y * s + p.oy;
+    // відштовхування мишкою
+    const dx = sx - mouse.x, dy = sy - mouse.y, d2 = dx * dx + dy * dy;
+    if (d2 < 14000) { const d = Math.sqrt(d2) || 1, k = (1 - d / 118) * 2.6; p.vx += dx / d * k; p.vy += dy / d * k; }
+    p.vx += -p.ox * .04; p.vy += -p.oy * .04; p.vx *= .86; p.vy *= .86; p.ox += p.vx; p.oy += p.vy;
+    const lime = (lf < .5 ? a.l : b.l);
+    const c = lime ? LIME : PAPER, al = Math.max(.15, Math.min(1, .55 + (1 - s) * -2.2 + .45));
+    const tw = reduce ? 1 : .75 + .25 * Math.sin(t * 2 + p.tw);
+    ctx.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${al * tw})`;
+    const r = 1.7 * s; ctx.fillRect(sx, sy, r, r);
+  }
+  requestAnimationFrame(frame);
+}
+(document.fonts ? document.fonts.load('200px "Dela Gothic One"').then(() => document.fonts.load('300 200px "JetBrains Mono"')) : Promise.resolve())
+  .catch(() => {}).then(start);
+let started = false;
+function start() {
+  if (started) return;
+  if (!size()) { setTimeout(start, 120); return; }
+  started = true; onScroll(); requestAnimationFrame(frame);
+}
+// страховка: якщо шрифти вантажаться довго, стартуємо все одно
+setTimeout(start, 1500);
+if (window.ResizeObserver) new ResizeObserver(() => { if (started) { size(); onScroll(); } }).observe(cv);
+if (matchMedia('(pointer: coarse)').matches) { document.getElementById('hint2').textContent = 'дотик — вибух'; }
+document.getElementById('copy').onclick = async (e) => { const t = document.getElementById('mailtxt').textContent; try { await navigator.clipboard.writeText(t); e.target.textContent = 'Скопійовано ✓'; } catch { const r = document.createRange(); r.selectNodeContents(document.getElementById('mailtxt')); getSelection().removeAllRanges(); getSelection().addRange(r); e.target.textContent = 'Email виділено'; } };
+const hd = document.querySelector('header'), bg = document.getElementById('burger');
+const setMenu = (o) => { hd.classList.toggle('open', o); bg.setAttribute('aria-expanded', o); bg.textContent = o ? 'Закрити' : 'Меню'; document.body.style.overflow = o ? 'hidden' : ''; };
+bg.onclick = () => setMenu(!hd.classList.contains('open'));
+document.querySelectorAll('#nav a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(size, 200); });
+})();
+</script>
+</body>
 </html>
