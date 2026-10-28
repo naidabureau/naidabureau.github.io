@@ -147,11 +147,7 @@ a.mail:hover{color:var(--paper)}
     <span class="k">Сцена 5 · Ваша черга</span>
     <h2 id="vh">Відчуйте себе розробником і дизайнером</h2>
     <p>Оберіть, як познайомитися зі мною ближче: попрацюйте в моїй власній операційній системі, змініть дизайн у живому редакторі або пройдіть гру про один день із життя дизайнерки й розробниці.</p>
-    <div class="vgrid">
-      <a class="v" href="os.html"><span class="n">01 · Операційна система</span><b>NaidaOS</b><span>Нові емоції від моєї власної ОС: вікна, які можна пересувати як звичайні програми на компʼютері, термінал з командами і проєкти, що відкриваються як програми.</span><em>Запустити NaidaOS →</em></a>
-      <a class="v" href="editor.html"><span class="n">02 · Редактор</span><b>Живий редактор</b><span>Змініть дизайн сторінки самі: тягніть елементи, міняйте кольори й дивіться, як наживо оновлюється код.</span><em>Відкрити редактор →</em></a>
-      <a class="v" href="game.html"><span class="n">03 · Гра</span><b>Naida Quest</b><span>Невеличка гра: день із життя дизайнерки й розробниці. Ідея, дизайн, код, запуск. Наприкінці на вас чекає приз.</span><em>Зіграти →</em></a>
-    </div>
+    <div data-minis></div>
     <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:8px">
       <button class="btn" type="button" id="copy" style="border:0;cursor:pointer;font:inherit;font-weight:700">Скопіювати email →</button>
       <a class="mail" id="mailtxt" href="mailto:naidadesign.int@gmail.com">naidadesign.int@gmail.com</a>
@@ -317,5 +313,6 @@ addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
 let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(size, 200); });
 })();
 </script>
+<script src="minis.js" defer></script>
 </body>
 </html>
