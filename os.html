@@ -318,7 +318,7 @@ const content = {
       <label for="m-what">Що хочете створити</label><input id="m-what" placeholder="Сайт, застосунок, бот…">
       <label for="m-msg">Повідомлення</label><textarea id="m-msg" placeholder="Кілька слів про ідею"></textarea>
       <button class="btn" type="submit">Надіслати</button>
-      <span class="mut" style="font-size:12px">Або напряму: <a href="mailto:naidadesign.int@gmail.com" style="color:var(--lime)">naidadesign.int@gmail.com</a> · <a href="tel:+380930003743" style="color:var(--lime)">+380 93 000 37 43</a></span>
+      <span class="mut" style="font-size:12px">Або напряму: <a href="mailto:naidadesign.int@gmail.com" style="color:var(--lime)">naidadesign.int@gmail.com</a> · <a href="tel:+380930003743" style="color:var(--lime)">+380 93 000 37 43</a> · <a href="https://t.me/NaidaBureau" target="_blank" rel="noopener" style="color:var(--lime)">Telegram</a></span>
     </form>`,
   bin: () => `<div class="pad"><h2 class="h" style="font-size:20px">Ідеї, які я викинула</h2>
     <div style="display:flex;flex-direction:column;gap:8px;font-family:var(--f-mono);font-size:13px;color:#D0CED5">
@@ -411,7 +411,7 @@ const init = {
       projects: () => '  ▸ Відважні — платформа для ветеранського бізнесу: застосунок + веб (2026, працює й доопрацьовується)\n  ▸ Чисті серця Калуш — сайт ГО (2022 → редизайн 2026)\n<span class="d">наберіть open vidvazhni</span>',
       skills: () => '<span class="p">design</span>  UI/UX · брендинг · анімації\n<span class="p">front</span>   HTML · CSS · JavaScript · React\n<span class="p">back</span>    Python · Django · PostgreSQL\n<span class="p">ship</span>    GitHub · Render · WordPress · Telegram API',
       ai: () => 'AI пише чернетки і рутину швидше. Архітектуру, дизайн і фінальний код вирішую я.\n<span class="p">✓</span> кожна зміна переглянута людиною',
-      contact: () => 'email  <a href="mailto:naidadesign.int@gmail.com" style="color:var(--lime)">naidadesign.int@gmail.com</a>\nтел.   <a href="tel:+380930003743" style="color:var(--lime)">+380 93 000 37 43</a>',
+      contact: () => 'email  <a href="mailto:naidadesign.int@gmail.com" style="color:var(--lime)">naidadesign.int@gmail.com</a>\nтел.   <a href="tel:+380930003743" style="color:var(--lime)">+380 93 000 37 43</a>\ntg     <a href="https://t.me/NaidaBureau" target="_blank" rel="noopener" style="color:var(--lime)">@NaidaBureau</a>',
       hire: () => { setTimeout(() => open('services'), 300); return '<span class="p">→</span> відкриваю Послуги.app…'; },
       theme: () => { const c = ['#D7FF3D', '#7CF3FF', '#FF9E5E', '#C3A6FF']; const cur = getComputedStyle(document.documentElement).getPropertyValue('--lime').trim().toUpperCase(); const n = c[(c.indexOf(cur) + 1) % c.length]; document.documentElement.style.setProperty('--lime', n); return `акцент змінено на ${n}`; },
       clear: () => { out.innerHTML = ''; return null; },
