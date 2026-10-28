@@ -385,25 +385,29 @@ function startL2() {
   document.querySelectorAll('#parts .part').forEach((p) => {
     p.addEventListener('pointerdown', (e) => {
       if (p.classList.contains('placed')) return;
-      const r = p.getBoundingClientRect(); const ox = e.clientX - r.left, oy = e.clientY - r.top;
-      p.setPointerCapture(e.pointerId); p.style.position = 'fixed'; p.style.zIndex = 50; p.style.left = r.left + 'px'; p.style.top = r.top + 'px';
+      // блок рухається разом з курсором/пальцем: зсуваємо через transform від стартової точки
+      // (position:fixed тут не підходить — батьківський блок має transform, і блок «відстрибував»)
+      e.preventDefault(); const sx = e.clientX, sy = e.clientY;
+      p.setPointerCapture(e.pointerId); p.style.position = 'relative'; p.style.zIndex = 50; p.style.transition = 'none'; p.style.transform = 'scale(1.04)';
       const slot = ph.querySelector(`[data-slot="${p.dataset.part}"]`);
-      const mv = (ev) => { p.style.left = (ev.clientX - ox) + 'px'; p.style.top = (ev.clientY - oy) + 'px';
+      const mv = (ev) => { p.style.transform = `translate(${ev.clientX - sx}px,${ev.clientY - sy}px) scale(1.04)`;
         ph.querySelectorAll('.slot').forEach((s) => { const sr = s.getBoundingClientRect(); s.classList.toggle('hot', ev.clientX > sr.left && ev.clientX < sr.right && ev.clientY > sr.top && ev.clientY < sr.bottom && !s.classList.contains('ok')); }); };
-      const up = (ev) => { p.removeEventListener('pointermove', mv); p.removeEventListener('pointerup', up);
+      const up = (ev) => { p.removeEventListener('pointermove', mv); p.removeEventListener('pointerup', up); p.removeEventListener('pointercancel', up);
         ph.querySelectorAll('.slot').forEach((s) => s.classList.remove('hot'));
         const sr = slot.getBoundingClientRect();
         if (ev.clientX > sr.left - 20 && ev.clientX < sr.right + 20 && ev.clientY > sr.top - 20 && ev.clientY < sr.bottom + 20) place(p, slot, sr.left, sr.top);
         else { const wrong = [...ph.querySelectorAll('.slot')].some((s) => { const q = s.getBoundingClientRect(); return ev.clientX > q.left && ev.clientX < q.right && ev.clientY > q.top && ev.clientY < q.bottom; });
-          if (wrong) addXP(-5, ev.clientX, ev.clientY); p.style.position = ''; p.style.left = p.style.top = ''; p.style.zIndex = ''; } };
-      p.addEventListener('pointermove', mv); p.addEventListener('pointerup', up);
+          if (wrong) addXP(-5, ev.clientX, ev.clientY);
+          // повертаємо блок на місце плавно
+          p.style.transition = 'transform .3s cubic-bezier(.2,.8,.2,1)'; p.style.transform = ''; setTimeout(() => { p.style.position = ''; p.style.zIndex = ''; p.style.transition = ''; }, 300); } };
+      p.addEventListener('pointermove', mv); p.addEventListener('pointerup', up); p.addEventListener('pointercancel', up);
     });
     // клавіатура: Enter ставить блок на місце
     p.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); const s = ph.querySelector(`[data-slot="${p.dataset.part}"]`); const r = s.getBoundingClientRect(); place(p, s, r.left, r.top); } });
   });
   function place(p, slot, x, y) {
     if (p.classList.contains('placed')) return;
-    slot.classList.add('ok'); slot.textContent = ''; p.classList.add('placed'); p.style.position = ''; p.style.left = p.style.top = ''; p.style.zIndex = '';
+    slot.classList.add('ok'); slot.textContent = ''; p.classList.add('placed'); p.style.position = ''; p.style.left = p.style.top = ''; p.style.zIndex = ''; p.style.transform = ''; p.style.transition = '';
     p.style.width = '100%'; p.style.height = '100%'; slot.appendChild(p); addXP(15, x, y); placed++;
     if (placed === 3) { ph.style.background = '#0B0B0D'; setTimeout(() => card('ДИЗАЙН ГОТОВИЙ · +50 XP', 'Дизайн — моя зона', 'Кожен блок стоїть там, де людині зручно.', () => { addXP(50); show(3); }), 500); }
   }
