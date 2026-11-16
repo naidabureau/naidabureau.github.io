@@ -21,6 +21,8 @@
 <title>NaidaBureau — контакти</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@300;400;500;700&family=Manrope:wght@400;500;700&display=swap">
 <style>
+/* знак <N/>: без лігатур, щоб «/» і «>» стояли рівно окремо */
+html{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
 /* Сторінка контактів. Телефон, пошту і Telegram змінюйте у блоці <div class="cards"> */
 :root{
   --ink:#070708; --paper:#F4F2EC; --muted:#A3A1AA; --lime:#D7FF3D; --line:#2A2A30;
@@ -99,7 +101,7 @@ footer a{color:var(--muted)}
   <a class="logo" href="index.html"><span class="m"><i>&lt;</i>N<i>/&gt;</i></span> NAIDA BUREAU</a>
   <nav class="nav" id="nav" aria-label="Головне меню">
     <a href="projects.html">Проєкти</a><span class="sep" aria-hidden="true"></span>
-    <a href="os.html">NaidaOS</a><a href="editor.html">Живий редактор</a><a href="game.html">Naida Quest</a>
+    <a href="index.html">NaidaOS</a><a href="editor.html">Живий редактор</a><a href="game.html">Naida Quest</a>
     <button class="lang" type="button" data-lang></button>
     <a class="cta" href="contacts.html" aria-current="page">Контакти</a>
   </nav>
@@ -157,7 +159,7 @@ document.getElementById('quick').onsubmit = (e) => { e.preventDefault();
   function build() {
     const D = Math.min(2, devicePixelRatio || 1); W = innerWidth; H = innerHeight; cv.width = W * D; cv.height = H * D; g.setTransform(D, 0, 0, D, 0, 0);
     const c = document.createElement('canvas'), x = c.getContext('2d'); c.width = 900; c.height = 360; x.textBaseline = 'middle'; x.textAlign = 'center';
-    x.font = '300 260px "JetBrains Mono", monospace'; x.fillStyle = '#0f0'; x.fillText('<', 140, 180); x.fillText('/>', 700, 180);
+    x.font = '300 260px "JetBrains Mono", monospace'; x.fillStyle = '#0f0'; x.fillText('<', 140, 180); x.fillText('/', 700, 180); x.fillText('>', 700 + x.measureText('/').width, 180);
     x.font = '280px "Dela Gothic One", sans-serif'; x.fillStyle = '#f00'; x.fillText('N', 430, 190);
     const d = x.getImageData(0, 0, 900, 360).data, small = W < 900, s = Math.min(W * (small ? .9 : .34), 620) / 900, ox = small ? W * .05 : W * .07, oy = small ? H * .62 : H - 360 * s - 30; P = [];
     for (let yy = 0; yy < 360; yy += 6) for (let xx = 0; xx < 900; xx += 6) { const i = (yy * 900 + xx) * 4; if (d[i + 3] > 128) P.push({ hx: ox + xx * s, hy: oy + yy * s, x: Math.random() * W, y: Math.random() * H, vx: 0, vy: 0, l: d[i + 1] > d[i], ph: Math.random() * 6.28 }); }

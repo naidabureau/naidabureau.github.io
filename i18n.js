@@ -129,6 +129,18 @@ const EN = {
   'Надіслати листом →': 'Send by email →',
   'Відповідаю протягом дня. Кнопка відкриває вашу пошту з уже готовим листом.': 'I reply within a day. The button opens your email app with the message ready to go.',
 
+  /* ---------- NaidaOS (головна) ---------- */
+  'NaidaBureau — NaidaOS': 'NaidaBureau — NaidaOS',
+  'Платформа ветеранського бізнесу': 'A platform for veteran-owned businesses',
+  'Веб-сайт громадської організації': 'Website for a non-profit organisation',
+  'застосунок + веб · 2026 · працює': 'app + web · 2026 · live',
+  'Нові проєкти з’являються тут. Детальніше — на сторінці «Усі проєкти».': 'New projects appear here. More on the “All projects” page.',
+  'Впіймайте знижку': 'Catch a discount', 'зіграйте в Naida Quest →': 'play Naida Quest →', 'Усі проєкти ↗': 'All projects ↗',
+  'play      зіграти в Naida Quest (−20%)': 'play      play Naida Quest (−20%)', 'editor    відкрити Живий редактор': 'editor    open the Live editor',
+  '▸ Відважні — платформа ветеранського бізнесу (застосунок + веб, 2026)': '▸ Vidvazhni — a platform for veteran-owned businesses (app + web, 2026)',
+  '▸ Чисті серця Калуш — веб-сайт громадської організації (2022 → 2026)': '▸ Pure Hearts Kalush — website for a non-profit (2022 → 2026)',
+  'запускаю Naida Quest…': 'launching Naida Quest…', 'відкриваю Живий редактор…': 'opening the Live editor…',
+  'Головна версія сайту — NaidaOS. Інші — альтернативні світи з тим самим змістом. Відкрийте кожну й порівняйте.': 'The main version of the site is NaidaOS. The others are alternative worlds with the same content. Open each and compare.',
   /* ---------- NaidaOS ---------- */
   'Робочий стіл NaidaOS': 'NaidaOS desktop',
   'AI-асистент працює під моїм контролем': 'The AI assistant works under my control',

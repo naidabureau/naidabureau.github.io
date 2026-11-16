@@ -21,6 +21,8 @@
 <title>NaidaBureau — проєкти</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@300;400;500;700&family=Manrope:wght@400;500;700&display=swap">
 <style>
+/* знак <N/>: без лігатур, щоб «/» і «>» стояли рівно окремо */
+html{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
 /* Сторінка проєктів. Щоб додати новий проєкт — скопіюйте блок <article class="proj"> і змініть тексти й картинки */
 :root{
   --ink:#070708; --paper:#F4F2EC; --muted:#A3A1AA; --lime:#D7FF3D; --line:#2A2A30;
@@ -171,7 +173,7 @@ footer a{color:var(--muted)}
   <a class="logo" href="index.html"><span class="m"><i>&lt;</i>N<i>/&gt;</i></span> NAIDA BUREAU</a>
   <nav class="nav" id="nav" aria-label="Головне меню">
     <a href="projects.html" aria-current="page">Проєкти</a><span class="sep" aria-hidden="true"></span>
-    <a href="os.html">NaidaOS</a><a href="editor.html">Живий редактор</a><a href="game.html">Naida Quest</a>
+    <a href="index.html">NaidaOS</a><a href="editor.html">Живий редактор</a><a href="game.html">Naida Quest</a>
     <button class="lang" type="button" data-lang></button>
     <a class="cta" href="contacts.html">Контакти</a>
   </nav>

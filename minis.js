@@ -3,14 +3,14 @@
    Тексти карток — у масиві CARDS нижче. */
 (() => {
 const CARDS = [
-  { key: 'os', href: 'os.html', n: '01 · ОС', name: 'NaidaOS', text: 'Моя операційна система в браузері', go: 'Запустити' },
+  { key: 'os', href: 'index.html', n: '01 · ОС', name: 'NaidaOS', text: 'Моя операційна система в браузері', go: 'Запустити' },
   { key: 'ed', href: 'editor.html', n: '02 · Редактор', name: 'Живий редактор', text: 'Змініть дизайн — код оновиться', go: 'Відкрити' },
   { key: 'qu', href: 'game.html', n: '03 · Гра', name: 'Naida Quest', text: 'Впіймайте знижку −20%', go: 'Зіграти' },
 ];
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const css = `
-.minis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;max-width:1180px}
+.minis{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;max-width:1180px}
 .mini{position:relative;display:flex;flex-direction:column;border-radius:22px;background:#0b0b0dd9;border:1px solid #ffffff1f;color:#F4F2EC;text-decoration:none;overflow:hidden;backdrop-filter:blur(14px);
   transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .25s,box-shadow .35s}
 .mini:hover,.mini:focus-visible{transform:translateY(-6px);border-color:#D7FF3D;box-shadow:0 30px 60px #000a,0 0 0 1px #D7FF3D33;outline:none}
