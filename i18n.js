@@ -11,6 +11,8 @@ const EN = {
   'NaidaBureau — проєкти': 'NaidaBureau — projects',
   'NaidaBureau — контакти': 'NaidaBureau — contacts',
   'NaidaBureau — живий редактор': 'NaidaBureau — live editor',
+  'Кіно і 3D · NAIDA BUREAU': 'Cinema & 3D · NAIDA BUREAU', 'Концепції · NAIDA BUREAU': 'Concepts · NAIDA BUREAU', 'Контакти · NAIDA BUREAU': 'Contacts · NAIDA BUREAU',
+  'Живий редактор · NAIDA BUREAU': 'Live editor · NAIDA BUREAU', 'Проєкти · NAIDA BUREAU': 'Projects · NAIDA BUREAU',
   'Головне меню': 'Main menu',
   'Меню': 'Menu',
   'Закрити': 'Close',
