@@ -77,6 +77,65 @@ button{font:inherit;color:inherit}
 .ico.sel{background:#d7ff3d1f;border-color:#d7ff3d55}
 .ico .g{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-family:var(--f-display);font-size:18px;box-shadow:0 6px 18px #0008}
 
+
+/* ---------- персоналізація: заставки, акцент, іконки ---------- */
+:root{--tile-dark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg opacity='.1' transform='translate%2820 46%29 scale%28.8%29'%3E%3Cpath d='M14 0 2 18l12 18' fill='none' stroke='%23D7FF3D' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 50V14h10l15 22V14h9v36H36L21 28v22z' transform='translate%286 -14%29' fill='%23F4F2EC'/%3E%3Cpath d='M60 36 68 0' fill='none' stroke='%23D7FF3D' stroke-width='3.4' stroke-linecap='round'/%3E%3Cpath d='M76 0l12 18-12 18' fill='none' stroke='%23D7FF3D' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E");--tile-light:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg opacity='.09' transform='translate%2820 46%29 scale%28.8%29'%3E%3Cpath d='M14 0 2 18l12 18' fill='none' stroke='%237f9900' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 50V14h10l15 22V14h9v36H36L21 28v22z' transform='translate%286 -14%29' fill='%230B0B0D'/%3E%3Cpath d='M60 36 68 0' fill='none' stroke='%237f9900' stroke-width='3.4' stroke-linecap='round'/%3E%3Cpath d='M76 0l12 18-12 18' fill='none' stroke='%237f9900' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E")}
+#desk{--desk-fg:var(--paper);transition:background .5s}
+.ico{color:var(--desk-fg);text-shadow:0 1px 3px #0009}
+.wall-sign{color:var(--desk-fg)}
+#icons.free{display:block;right:0;bottom:90px;pointer-events:none}
+#icons.free .ico{position:absolute;pointer-events:auto;transition:left .25s,top .25s}
+#icons.free .ico.dragging{transition:none;z-index:5;opacity:.9;transform:scale(1.06)}
+/* 1 · Ніч (стандартна) — без змін */
+/* 2 · Сітка */
+#desk.wp-grid{background:linear-gradient(#ffffff0a 1px,transparent 1px) 0 0/48px 48px,linear-gradient(90deg,#ffffff0a 1px,transparent 1px) 0 0/48px 48px,radial-gradient(900px 600px at 70% 40%,#1d2112,transparent 65%),#09090b}
+#desk.wp-grid .wall{opacity:.16;right:50%;bottom:50%;transform:translate(50%,50%)}
+#desk.wp-grid .wall b{color:transparent;-webkit-text-stroke:2px var(--paper)}
+/* 3 · Візерунок */
+#desk.wp-pattern{background:var(--tile-dark) 0 0/120px 120px,radial-gradient(1000px 700px at 70% 30%,#1a1d10,transparent 60%),#0a0a0c}
+#desk.wp-pattern .wall{opacity:.05}
+/* 4 · Лайм */
+#desk.wp-lime{--desk-fg:#0B0B0D;background:radial-gradient(900px 700px at 80% 20%,#efff9a,transparent 60%),var(--lime)}
+#desk.wp-lime .wall{opacity:.14}#desk.wp-lime .wall i,#desk.wp-lime .wall b{color:#0B0B0D}
+#desk.wp-lime .ico{text-shadow:none}#desk.wp-lime .wall-sign .dot{color:#0B0B0D}#desk.wp-lime .wall-sign small{color:#0B0B0D99}
+/* 5 · Папір (світла) */
+#desk.wp-paper{--desk-fg:#0B0B0D;background:var(--tile-light) 0 0/120px 120px,#F4F2EC}
+#desk.wp-paper .wall{opacity:.1}#desk.wp-paper .wall b{color:#0B0B0D}#desk.wp-paper .wall i{color:#0B0B0D}
+#desk.wp-paper .ico{text-shadow:none}#desk.wp-paper .wall-sign small{color:#0B0B0D99}
+/* 6 · Аврора */
+#desk.wp-aurora{background:radial-gradient(700px 500px at 20% 20%,#2B3AFF55,transparent 60%),radial-gradient(800px 600px at 85% 80%,#d7ff3d40,transparent 60%),radial-gradient(600px 500px at 60% 10%,#C3A6FF33,transparent 60%),#08080b;animation:aur 18s ease-in-out infinite alternate;background-size:140% 140%}
+@keyframes aur{to{background-position:30% 20%,70% 80%,40% 60%,0 0}}
+#desk.wp-aurora .wall{opacity:.12;filter:blur(.5px)}
+@media (prefers-reduced-motion: reduce){#desk.wp-aurora{animation:none}}
+/* контекстне меню робочого столу */
+.ctx{position:fixed;z-index:900;min-width:230px;padding:6px;border-radius:12px;background:#17171bf2;border:1px solid #ffffff1c;box-shadow:0 20px 50px #000c;backdrop-filter:blur(14px);font-size:13px;display:none}
+.ctx.on{display:block;animation:pop .14s ease}
+@keyframes pop{from{opacity:0;transform:scale(.96)}}
+.ctx button{display:flex;align-items:center;gap:10px;width:100%;padding:8px 10px;border:0;border-radius:8px;background:none;cursor:pointer;text-align:left;color:var(--paper)}
+.ctx button:hover,.ctx button:focus-visible{background:var(--lime);color:var(--ink);outline:none}
+.ctx hr{border:0;border-top:1px solid #ffffff14;margin:5px 4px}
+.ctx .kb{margin-left:auto;font-family:var(--f-mono);font-size:11px;opacity:.6}
+.desk-hint{position:absolute;left:50%;top:44px;transform:translateX(-50%);z-index:4;font-family:var(--f-mono);font-size:11px;color:var(--desk-fg);opacity:.0;background:#0b0b0d99;padding:6px 12px;border-radius:999px;border:1px solid #ffffff14;pointer-events:none;transition:opacity .6s}
+.desk-hint.on{opacity:.85}
+/* вікно «Налаштування» */
+.g-set{background:linear-gradient(150deg,#3a3a42,#1c1c21);color:var(--paper)}
+.set{padding:18px;display:flex;flex-direction:column;gap:18px;overflow:auto;height:100%}
+.set h3{margin:0 0 10px;font-family:var(--f-mono);font-weight:500;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.wps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.wp{display:flex;flex-direction:column;gap:6px;padding:0;border:0;background:none;cursor:pointer;color:var(--paper);font-size:12px;text-align:left}
+.wp .pv{position:relative;aspect-ratio:16/10;border-radius:10px;border:2px solid #ffffff1a;overflow:hidden;display:grid;place-items:center;font-size:26px;line-height:1;transition:border-color .2s,transform .2s}
+.wp .pv span i{font-family:var(--f-mono);font-weight:300;font-style:normal;color:var(--lime)} .wp .pv span b{font-family:var(--f-display);font-weight:400}
+.wp:hover .pv{transform:translateY(-2px)}
+.wp[data-wp="lime"] .pv i,.wp[data-wp="paper"] .pv b{color:#0B0B0D}
+.wp[aria-pressed="true"] .pv{border-color:var(--lime)}
+.accs{display:flex;flex-wrap:wrap;gap:10px}
+.acc{width:34px;height:34px;border-radius:50%;border:3px solid transparent;cursor:pointer;box-shadow:inset 0 0 0 1px #0004}
+.acc[aria-pressed="true"]{border-color:var(--paper)}
+.set .row{display:flex;flex-wrap:wrap;gap:8px}
+.set .row button{padding:9px 13px;border-radius:10px;border:1px solid var(--line);background:#ffffff08;cursor:pointer;font-size:13px}
+.set .row button:hover{border-color:var(--lime)}
+.set .tip{font-size:12px;color:var(--muted);line-height:1.5}
+
 /* вікна */
 .win{position:absolute;min-width:300px;min-height:200px;display:flex;flex-direction:column;border-radius:14px;background:var(--surface);border:1px solid var(--line);
   box-shadow:0 30px 80px #000c,0 0 0 1px #ffffff08 inset;overflow:hidden;animation:pop .28s cubic-bezier(.2,.9,.3,1.2) both}
@@ -264,6 +323,7 @@ button{font:inherit;color:inherit}
       <button type="button" data-open="editor">Живий редактор</button>
       <button type="button" data-open="services">Послуги</button>
       <button type="button" data-open="terminal">Термінал</button>
+      <button type="button" data-open="settings">Вигляд</button>
       <button type="button" data-open="mail">Зв’язок</button>
     </div>
     <div class="right">
@@ -277,10 +337,20 @@ button{font:inherit;color:inherit}
   <div class="hello" aria-hidden="true"><span id="hdate"></span><b>Привіт, я Наталія</b></div>
   <div id="icons" role="list"></div>
   <button class="deal" type="button" data-open="quest" id="deal"><b>−20%</b><span>Впіймайте знижку<small>зіграйте в Naida Quest →</small></span></button>
+  <div class="desk-hint" id="deskHint">Правий клік на столі — змінити заставку й тему · іконки можна перетягувати</div>
   <div id="wins"></div>
 
   <nav id="dock" aria-label="Док"></nav>
 </main>
+<div class="ctx" id="ctx" role="menu" aria-label="Меню робочого столу">
+  <button type="button" role="menuitem" data-ctx="wall">🖼  Змінити заставку…</button>
+  <button type="button" role="menuitem" data-ctx="next">⟳  Наступна заставка</button>
+  <button type="button" role="menuitem" data-ctx="accent">●  Змінити колір теми</button>
+  <hr>
+  <button type="button" role="menuitem" data-ctx="tidy">▦  Впорядкувати іконки</button>
+  <button type="button" role="menuitem" data-ctx="term">&gt;_  Відкрити термінал</button>
+  <button type="button" role="menuitem" data-ctx="projects">▤  Проєкти</button>
+</div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -302,8 +372,9 @@ const APPS = {
   bin: { name: 'Кошик', g: 'g-bin', glyph: '⌫', w: 420, h: 330 },
   quest: { name: 'Naida Quest', g: 'g-quest', glyph: '▶', w: 900, h: 640, app: 'game.html' },
   editor: { name: 'Живий редактор', g: 'g-ed', glyph: '✎', w: 1180, h: 700, app: 'editor.html' },
+  settings: { name: 'Вигляд', g: 'g-set', glyph: '⚙', w: 540, h: 610 },
 };
-const ICONS = ['projects', 'quest', 'editor', 'vidvazhni', 'pureheart', 'terminal', 'services', 'me', 'mail', 'bin'];
+const ICONS = ['projects', 'quest', 'editor', 'vidvazhni', 'pureheart', 'terminal', 'services', 'me', 'mail', 'settings', 'bin'];
 const DOCK = ['projects', 'quest', 'editor', 'terminal', 'services', 'mail'];
 // гра й редактор відкриваються всередині вікна (та сама сторінка, що й окремо)
 const appFrame = (k) => `<iframe src="${APPS[k].app}?embed=1${window.LANG === 'en' ? '&lang=en' : ''}" title="${APPS[k].name}" allow="clipboard-write"></iframe>`;
@@ -314,6 +385,12 @@ const content = {
       <button class="prow" type="button" data-open="vidvazhni"><div class="th"><img src="works/vidvazhni-web-home.jpg" alt=""></div><div><b>Відважні</b><span class="ty">Платформа ветеранського бізнесу</span><span class="yr">застосунок + веб · 2026 · працює</span></div><span class="go">Відкрити →</span></button>
       <button class="prow" type="button" data-open="pureheart"><div class="th"><img src="works/pureheart-desktop.jpg" alt=""></div><div><b>Чисті серця Калуш</b><span class="ty">Веб-сайт громадської організації</span><span class="yr">2022 → редизайн 2026</span></div><span class="go">Відкрити →</span></button>
       <div class="note">Нові проєкти з’являються тут. Детальніше — на сторінці «Усі проєкти».</div>
+    </div>`,
+  settings: () => `<div class="set">
+      <section><h3>Заставка</h3><div class="wps">${WALLS.map((w) => `<button class="wp" type="button" data-wp="${w.id}" aria-pressed="false"><span class="pv" style="${w.pv}"><span><i>&lt;</i><b>N</b><i>/&gt;</i></span></span>${w.name}</button>`).join('')}</div></section>
+      <section><h3>Колір теми</h3><div class="accs">${ACCENTS.map((c) => `<button class="acc" type="button" data-acc="${c[0]}" aria-pressed="false" aria-label="${c[1]}" title="${c[1]}" style="background:${c[0]}"></button>`).join('')}</div></section>
+      <section><h3>Іконки</h3><div class="row"><button type="button" data-tidy>▦ Впорядкувати іконки</button><button type="button" data-reset>↺ Скинути все</button></div>
+      <p class="tip" style="margin:10px 0 0">Іконки на столі можна перетягувати мишкою — розставте як зручно, NaidaOS запамʼятає. Правий клік на столі відкриває швидке меню.</p></section>
     </div>`,
   quest: () => appFrame('quest'),
   editor: () => appFrame('editor'),
@@ -370,6 +447,28 @@ const content = {
     <p class="mut" style="margin:16px 0 0;font-size:13px">Кошик не очищується: нагадує, як не треба.</p></div>`,
 };
 
+/* ---------- персоналізація: заставки, колір теми, розташування іконок (запамʼятовується в браузері) ---------- */
+const WALLS = [
+  { id: 'night', name: 'Ніч', pv: 'background:radial-gradient(circle at 75% 30%,#2a3210,transparent 60%),#0B0B0D;color:#F4F2EC' },
+  { id: 'grid', name: 'Сітка', pv: 'background:linear-gradient(#ffffff14 1px,transparent 1px) 0 0/12px 12px,linear-gradient(90deg,#ffffff14 1px,transparent 1px) 0 0/12px 12px,#09090b;color:#F4F2EC' },
+  { id: 'pattern', name: 'Візерунок', pv: 'background:var(--tile-dark) 0 0/40px 40px,#0a0a0c;color:#F4F2EC' },
+  { id: 'lime', name: 'Лайм', pv: 'background:var(--lime);color:#0B0B0D' },
+  { id: 'paper', name: 'Папір', pv: 'background:var(--tile-light) 0 0/40px 40px,#F4F2EC;color:#0B0B0D' },
+  { id: 'aurora', name: 'Аврора', pv: 'background:radial-gradient(circle at 20% 20%,#2B3AFF88,transparent 60%),radial-gradient(circle at 85% 80%,#d7ff3d66,transparent 60%),#08080b;color:#F4F2EC' },
+];
+const ACCENTS = [['#D7FF3D', 'Лайм'], ['#7CF3FF', 'Блакитний'], ['#FF9E5E', 'Помаранчевий'], ['#C3A6FF', 'Бузковий'], ['#FF7AB6', 'Рожевий'], ['#F2C14E', 'Золотий']];
+const store = { get(k, d) { try { const v = localStorage.getItem('nbos-' + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem('nbos-' + k, JSON.stringify(v)); } catch (e) {} }, del(k) { try { localStorage.removeItem('nbos-' + k); } catch (e) {} } };
+function setWall(id, save = true) {
+  const d = document.getElementById('desk'); WALLS.forEach((w) => d.classList.remove('wp-' + w.id)); if (id !== 'night') d.classList.add('wp-' + id);
+  document.querySelectorAll('[data-wp]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.wp === id)); if (save) store.set('wall', id);
+}
+function setAccent(c, save = true) {
+  document.documentElement.style.setProperty('--lime', c);
+  document.querySelectorAll('[data-acc]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.acc === c)); if (save) store.set('accent', c);
+}
+const curWall = () => store.get('wall', 'night'), curAcc = () => store.get('accent', '#D7FF3D');
+setWall(curWall(), false); setAccent(curAcc(), false);
+
 /* ---------- стіл, док ---------- */
 const iconsEl = $('#icons');
 iconsEl.innerHTML = ICONS.map((k) => `<button class="ico" type="button" role="listitem" data-app="${k}"><span class="g ${APPS[k].g}">${APPS[k].glyph}</span>${APPS[k].name}</button>`).join('');
@@ -378,6 +477,56 @@ iconsEl.addEventListener('click', (e) => {
   iconsEl.querySelectorAll('.ico').forEach((x) => x.classList.toggle('sel', x === b));
   open(b.dataset.app);
 });
+
+/* ---------- іконки можна перетягувати (на компʼютері) ---------- */
+const GRID = 102;   // крок сітки іконок (як у стандартному розташуванні)
+function freeLayout(pos) {
+  // переводимо іконки з сітки в «вільне» розташування, зберігаючи поточні місця
+  const base = iconsEl.getBoundingClientRect(), cur = {};
+  iconsEl.querySelectorAll('.ico').forEach((b) => { const r = b.getBoundingClientRect(); cur[b.dataset.app] = [r.left - base.left, r.top - base.top]; });
+  iconsEl.classList.add('free');
+  iconsEl.querySelectorAll('.ico').forEach((b) => { const p = (pos && pos[b.dataset.app]) || cur[b.dataset.app]; b.style.left = p[0] + 'px'; b.style.top = p[1] + 'px'; });
+}
+function savePos() { const p = {}; iconsEl.querySelectorAll('.ico').forEach((b) => { p[b.dataset.app] = [parseFloat(b.style.left), parseFloat(b.style.top)]; }); store.set('icons', p); }
+function tidy() { store.del('icons'); iconsEl.classList.remove('free'); iconsEl.querySelectorAll('.ico').forEach((b) => { b.style.left = b.style.top = ''; }); }
+if (!mobile() && store.get('icons')) requestAnimationFrame(() => freeLayout(store.get('icons')));
+let justDragged = false;
+iconsEl.addEventListener('pointerdown', (e) => {
+  const b = e.target.closest('.ico'); if (!b || mobile() || e.button !== 0) return;
+  const sx = e.clientX, sy = e.clientY; let moving = false, ox = 0, oy = 0;
+  const mv = (ev) => {
+    if (!moving) { if (Math.hypot(ev.clientX - sx, ev.clientY - sy) < 6) return; moving = true;
+      if (!iconsEl.classList.contains('free')) freeLayout(); ox = parseFloat(b.style.left); oy = parseFloat(b.style.top); b.classList.add('dragging'); b.setPointerCapture(e.pointerId); }
+    const W = iconsEl.clientWidth - 92, Hh = innerHeight - 200;
+    b.style.left = Math.max(0, Math.min(W, ox + ev.clientX - sx)) + 'px'; b.style.top = Math.max(0, Math.min(Hh, oy + ev.clientY - sy)) + 'px';
+  };
+  const up = () => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up);
+    if (!moving) return; justDragged = true; setTimeout(() => justDragged = false, 50); b.classList.remove('dragging');
+    // прилипання до невидимої сітки
+    b.style.left = Math.round(parseFloat(b.style.left) / GRID) * GRID + 'px'; b.style.top = Math.round(parseFloat(b.style.top) / GRID) * GRID + 'px'; savePos(); };
+  addEventListener('pointermove', mv); addEventListener('pointerup', up);
+});
+iconsEl.addEventListener('click', (e) => { if (justDragged) { e.stopImmediatePropagation(); e.preventDefault(); } }, true);
+
+/* ---------- меню робочого столу (правий клік; на телефоні — довге натискання) ---------- */
+const ctx = $('#ctx');
+function showCtx(x, y) { ctx.classList.add('on'); const r = ctx.getBoundingClientRect(); ctx.style.left = Math.min(x, innerWidth - r.width - 8) + 'px'; ctx.style.top = Math.min(y, innerHeight - r.height - 8) + 'px'; ctx.querySelector('button').focus({ preventScroll: true }); }
+const hideCtx = () => ctx.classList.remove('on');
+const onDesk = (t) => t === $('#desk') || t.closest('.wall,.wall-sign,.hello') || t === iconsEl;
+$('#desk').addEventListener('contextmenu', (e) => { if (!onDesk(e.target)) return; e.preventDefault(); showCtx(e.clientX, e.clientY); });
+let lp; $('#desk').addEventListener('touchstart', (e) => { if (!onDesk(e.target)) return; const t = e.touches[0]; lp = setTimeout(() => showCtx(t.clientX, t.clientY), 550); }, { passive: true });
+['touchend', 'touchmove'].forEach((ev) => $('#desk').addEventListener(ev, () => clearTimeout(lp), { passive: true }));
+addEventListener('pointerdown', (e) => { if (!e.target.closest('#ctx')) hideCtx(); });
+addEventListener('keydown', (e) => { if (e.key === 'Escape') hideCtx(); });
+ctx.addEventListener('click', (e) => {
+  const a = e.target.closest('[data-ctx]'); if (!a) return; hideCtx();
+  const i = WALLS.findIndex((w) => w.id === curWall());
+  ({ wall: () => open('settings'), next: () => { const w = WALLS[(i + 1) % WALLS.length]; setWall(w.id); toast((window.T || String)('Заставка') + ': ' + (window.T || String)(w.name)); },
+     accent: () => { const k = ACCENTS.findIndex((c) => c[0] === curAcc()); setAccent(ACCENTS[(k + 1) % ACCENTS.length][0]); },
+     tidy, term: () => open('terminal'), projects: () => open('projects') })[a.dataset.ctx]();
+});
+// підказка один раз за візит
+setTimeout(() => { if (!mobile() && !store.get('hinted')) { const h = $('#deskHint'); h.classList.add('on'); setTimeout(() => h.classList.remove('on'), 6000); store.set('hinted', 1); } }, 4200);
 const dock = $('#dock');
 dock.innerHTML = DOCK.map((k, i) => `${i === 3 ? '<span class="sep"></span>' : ''}<button type="button" class="${APPS[k].g}${i > 3 ? ' extra' : ''}" data-app="${k}" aria-label="${APPS[k].name}">${APPS[k].glyph}<span class="tip">${APPS[k].name}</span></button>`).join('');
 dock.addEventListener('click', (e) => { const b = e.target.closest('button[data-app]'); if (b) open(b.dataset.app); });
@@ -432,6 +581,13 @@ function resize(h, w) {
 
 /* ---------- поведінка програм ---------- */
 const init = {
+  settings(w) {
+    setWall(curWall(), false); setAccent(curAcc(), false);
+    w.querySelectorAll('[data-wp]').forEach((b) => b.onclick = () => setWall(b.dataset.wp));
+    w.querySelectorAll('[data-acc]').forEach((b) => b.onclick = () => setAccent(b.dataset.acc));
+    w.querySelector('[data-tidy]').onclick = tidy;
+    w.querySelector('[data-reset]').onclick = () => { tidy(); setWall('night'); setAccent('#D7FF3D'); };
+  },
   vidvazhni(w) {
     const imgs = w.querySelectorAll('#vphone img');
     w.querySelectorAll('[data-scr]').forEach((b) => b.onclick = () => {
@@ -450,7 +606,7 @@ const init = {
     const hist = []; let hi = 0;
     const print = (h) => { out.insertAdjacentHTML('beforeend', `<div>${h}</div>`); box.scrollTop = box.scrollHeight; };
     const CMD = {
-      help: () => `<span class="d">доступні команди:</span>\n  about     хто я\n  projects  мої роботи\n  open vidvazhni | open pureheart\n  play      зіграти в Naida Quest (−20%)\n  editor    відкрити Живий редактор\n  skills    що я вмію\n  contact   як зі мною зв’язатися\n  ai        як я працюю з AI\n  hire      замовити проєкт\n  theme     змінити акцент\n  clear     очистити`,
+      help: () => `<span class="d">доступні команди:</span>\n  about     хто я\n  projects  мої роботи\n  open vidvazhni | open pureheart\n  play      зіграти в Naida Quest (−20%)\n  editor    відкрити Живий редактор\n  skills    що я вмію\n  contact   як зі мною зв’язатися\n  ai        як я працюю з AI\n  hire      замовити проєкт\n  theme     змінити акцент\n  wallpaper змінити заставку\n  clear     очистити`,
       about: () => 'Наталія Найда — дизайнерка і фулстак-розробниця. NaidaBureau = дизайн + код + контроль.',
       projects: () => '  ▸ Відважні — платформа ветеранського бізнесу (застосунок + веб, 2026)\n  ▸ Чисті серця Калуш — веб-сайт громадської організації (2022 → 2026)\n<span class="d">наберіть open vidvazhni</span>',
       play: () => { open('quest'); return '<span class="p">→</span> запускаю Naida Quest…'; },
@@ -459,7 +615,8 @@ const init = {
       ai: () => 'AI пише чернетки і рутину швидше. Архітектуру, дизайн і фінальний код вирішую я.\n<span class="p">✓</span> кожна зміна переглянута людиною',
       contact: () => 'email  <a href="mailto:naidadesign.int@gmail.com" style="color:var(--lime)">naidadesign.int@gmail.com</a>\nтел.   <a href="tel:+380930003743" style="color:var(--lime)">+380 93 000 37 43</a>\ntg     <a href="https://t.me/NaidaBureau" target="_blank" rel="noopener" style="color:var(--lime)">@NaidaBureau</a>',
       hire: () => { setTimeout(() => open('services'), 300); return '<span class="p">→</span> відкриваю Послуги.app…'; },
-      theme: () => { const c = ['#D7FF3D', '#7CF3FF', '#FF9E5E', '#C3A6FF']; const cur = getComputedStyle(document.documentElement).getPropertyValue('--lime').trim().toUpperCase(); const n = c[(c.indexOf(cur) + 1) % c.length]; document.documentElement.style.setProperty('--lime', n); return `акцент змінено на ${n}`; },
+      theme: () => { const k = ACCENTS.findIndex((c) => c[0] === curAcc()); const n = ACCENTS[(k + 1) % ACCENTS.length][0]; setAccent(n); return `акцент змінено на ${n}`; },
+      wallpaper: () => { const i = WALLS.findIndex((w) => w.id === curWall()); const w = WALLS[(i + 1) % WALLS.length]; setWall(w.id); return `заставка: ${w.name}`; },
       clear: () => { out.innerHTML = ''; return null; },
       sudo: () => '<span class="e">доступ заборонено:</span> контроль тут тільки в Наталії 🙂'.replace(' 🙂', ''),
     };
